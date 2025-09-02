@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+    <head>
+        <meta charset="UTF-8">
+        <title>Motor</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="../css/estilos.css">
+        <link type="text/css" rel="stylesheet" href="../css/estilos2.css">
+        <link rel="icon" type="image/png" href="../logo.country.png">
+        <style>
+            .tope2 {
+                width: 100%;
+                height: 50px;
+                border-bottom: 1px solid #d4d4d4
+            }
+
+            .tope2_contenedor {
+                display: flex;
+                align-items: center;
+                max-width: 999px;
+                height: 50px;
+                margin: 0 auto
+            }
+
+            .tope2_logo img {
+                height: 40px;
+                width: auto;
+                padding-left: 10px
+            }
+
+            #tope2_buscar {
+                width: 100%
+            }
+
+            #tope2_buscar form {
+                position: relative;
+                width: 250px;
+                margin-left: 30px;
+                font-family: roboto,arial,helvetica,sans-serif;
+                font-size: 14px
+            }
+
+            #tope2_buscar svg {
+                position: absolute;
+                top: 6px;
+                left: 8px;
+                width: 24px;
+                height: 24px;
+                fill: #666666
+            }
+
+            #buscar_tope {
+                box-sizing: border-box;
+                width: 100%;
+                font-family: roboto,arial,helvetica,sans-serif;
+                font-size: 14px;
+                height: 35px;
+                line-height: 35px;
+                padding: 5px 10px 5px 33px;
+                color: #666;
+                margin: 0;
+                vertical-align: middle;
+                background-color: #f0f0f0;
+                border: 1px solid #f0f0f0;
+                border-radius: 20px;
+                opacity: 1;
+                outline: 0;
+                transition: border .16s ease-out
+            }
+
+            #buscar_tope:focus {
+                border: 1px solid #00aeef;
+                box-shadow: 0 0 0 1px #00aeef
+            }
+
+            #buscar_tope:focus::-webkit-input-placeholder,#buscar_tope:focus::placeholder {
+                color: transparent
+            }
+
+            .tope2_micuenta {
+                margin-left: 20px;
+                font-size: 11px;
+                white-space: nowrap
+            }
+
+            .tope2_micuenta svg {
+                vertical-align: -8px;
+                width: 24px;
+                height: 24px
+            }
+
+            .tope2_publicar {
+                margin-left: 20px;
+                margin-right: 10px
+            }
+
+            .tope2_publicar .botonpublicar {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                font-family: roboto,arial,helvetica,sans-serif;
+                font-size: 14px;
+                height: 30px;
+                line-height: initial;
+                font-weight: 600;
+                margin: 0;
+                padding-left: 16px;
+                padding-right: 16px;
+                color: #fff;
+                background-color: #333;
+                border-radius: 20px;
+                border-width: 0;
+                cursor: pointer;
+                outline: 0;
+                white-space: nowrap
+            }
+
+            .tope2_publicar .botonpublicar span {
+                font-size: 21px;
+                line-height: 24px
+            }
+
+            a.botonpublicar:active,a.botonpublicar:hover,a.botonpublicar:link,a.botonpublicar:visited {
+                text-decoration: none
+            }
+
+            @media (max-width: 767.98px) {
+                .tope2 {
+                    position:fixed;
+                    top: 0;
+                    z-index: 1000;
+                    background-color: #fff;
+                    transition: all .3s ease
+                }
+
+                .tope2.hide {
+                    top: -102px
+                }
+
+                .tope2_logo {
+                    width: 100%
+                }
+
+                .tope2_logo img {
+                    height: 33px
+                }
+
+                #tope2_buscar {
+                    position: absolute;
+                    top: 50px;
+                    box-sizing: border-box;
+                    display: block;
+                    background-color: #fff;
+                    padding: 0 10px 10px 10px;
+                    border-bottom: 1px solid #d4d4d4
+                }
+
+                #tope2_buscar form {
+                    width: 100%;
+                    margin-left: 0
+                }
+
+                #tope2_buscar svg {
+                    top: 8px
+                }
+
+                .tope2_micuenta {
+                    margin-left: 5px
+                }
+
+                .tope2_micuenta .person {
+                    vertical-align: unset
+                }
+
+                .tope2_micuenta a span {
+                    display: none
+                }
+
+                .tope2_publicar {
+                    margin-left: 5px
+                }
+
+                .tope2_publicar .botonpublicar {
+                    padding-left: 12px;
+                    padding-right: 12px
+                }
+
+                #buscar_tope {
+                    font-size: 16px;
+                    height: 40px;
+                    line-height: 40px
+                }
+            }
+
+            .jumbotron-wrapper {
+                width: 100%;
+                background-color: #f0f0f0;
+                margin-bottom: 30px
+            }
+
+            .jumbotron {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 15px;
+                max-width: 800px;
+                margin: auto;
+                padding: 20px
+            }
+
+            .jumbotron h1 {
+                margin: 0 0 15px 0
+            }
+
+            .jumbotron p {
+                line-height: 22px;
+                margin: 0
+            }
+
+            .jumbotron a {
+                margin-top: 15px
+            }
+
+            .jumbotron img {
+                border-radius: 4px
+            }
+
+            @media (max-width: 767.98px) {
+                .jumbotron-wrapper {
+                    margin-top:101px
+                }
+
+                .jumbotron {
+                    flex-direction: column
+                }
+
+                .jumbotron a {
+                    box-sizing: border-box;
+                    width: 100%
+                }
+
+                .jumbotron img {
+                    width: 100%;
+                    height: unset
+                }
+            }
+
+            .iconos_frases_inicio {
+                display: flex;
+                flex-wrap: wrap;
+                margin: 10px 10px 0 10px;
+                font: 11px Roboto,Arial,Helvetica,sans-serif
+            }
+
+            .iconos_frases_inicio .item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                width: 16.66%;
+                height: 100px
+            }
+
+            .iconos_frases_inicio .item a {
+                display: block
+            }
+
+            .iconos_frases_inicio .item a:first-of-type {
+                width: 32px;
+                height: 32px;
+                padding: 10px;
+                margin-bottom: 7px;
+                border-radius: 50%
+            }
+
+            .iconos_frases_inicio .item svg {
+                width: 32px;
+                height: 32px;
+                fill: #333333
+            }
+
+            @media (max-width: 850px) {
+                .iconos_frases_inicio .item {
+                    width:25%
+                }
+            }
+
+            @media (max-width: 700px) {
+                .iconos_frases_inicio .item {
+                    width:33.33%
+                }
+            }
+
+            @media (max-width: 320px) {
+                .iconos_frases_inicio .item {
+                    width:50%
+                }
+            }
+
+            .frases_links_home ul {
+                display: flex;
+                flex-wrap: wrap;
+                margin: 0;
+                padding: 0;
+                list-style: none
+            }
+
+            .frases_links_home ul li {
+                width: 25%;
+                min-height: 36px
+            }
+
+            @media (max-width: 767.98px) {
+                .frases_links_home {
+                    margin:0 10px
+                }
+
+                .frases_links_home ul li {
+                    width: 50%
+                }
+            }
+        </style>
+    </head>
+    <body class="argentino">
+        <div class="tope2" id="tope2">
+            <div class="tope2_contenedor">
+                <div class="tope2_logo">
+                    <a href="/argentino.demo/">
+                        <img srcset="../logo.svg.png" sizes="(max-width: 767.98px) 132px, (min-width: 768px) 160px, 132px" src="../logo.svg.png" alt="Logo mexicano" width="132" height="33">
+                    </a>
+                </div>
+                <div id="tope2_buscar">
+                   <form method="get" action="resultadosCategorias.html" class="formulario">
+                        <input name="q" id="buscar_tope" type="text" value="" maxlength="100" placeholder="¿qué buscas?">
+                        <a href="javascript:;" onclick="document.querySelector('#tope2_buscar form').submit();">
+                    </a>
+                    </form> 
+                </div>
+            </div>
+        </div>
+        <script>
+            !function() {
+                function e() {
+                    l = o.scrollY || n.scrollTop,
+                    s < l ? t = 2 : l < s && (t = 1),
+                    t !== c && function(e, l) {
+                        if (e === 2 && l > 101) {
+                            i.classList.add("hide");
+                            c = e
+                        } else if (e === 1) {
+                            i.classList.remove("hide");
+                            c = e
+                        }
+                    }(t, l),
+                    s = l
+                }
+                var l, n = document.documentElement, o = window, s = o.scrollY || n.scrollTop, t = 0, c = 0, i = document.getElementById("tope2");
+                null != i && screen.width < 768 && window.addEventListener("scroll", e, {
+                    passive: !0
+                })
+            }();
+        </script>
+        <div id="contenido" style="margin-top: 0px;">
+            <div class="home_taxonomia">
+                <h1>Motor</h1>
+                <ul>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Ambulancias en Mexico" title="Ambulancias en Mexico">
+                            <img src="../imagenes/ambulancias.jpg" width="100" height="75" alt="Ambulancias en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Ambulancias en Mexico" title="Ambulancias en Mexico">Ambulancias</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Autobuses en Mexico" title="Autobuses en Mexico">
+                            <img src="../imagenes/medios-de-transporte.jpg" width="100" height="75" alt="Autobuses en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Autobuses en Mexico" title="Autobuses en Mexico">Autobuses</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Autoescuelas en Mexico" title="Autoescuelas en Mexico">
+                            <img src="../imagenes/autoescuelas.jpg" width="100" height="75" alt="Autoescuelas en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Autoescuelas en Mexico" title="Autoescuelas en Mexico">Autoescuelas</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Autos en Mexico" title="Autos en Mexico">
+                            <img src="../imagenes/automoviles.jpg" width="100" height="75" alt="Autos en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Autos en Mexico" title="Autos en Mexico">Autos</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Autos chocados en Mexico" title="Autos chocados en Mexico">
+                            <img src="../imagenes/autos-chocados.jpg" width="100" height="75" alt="Autos chocados en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Autos chocados en Mexico" title="Autos chocados en Mexico">Autos chocados</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Camiones en Mexico" title="Camiones en Mexico">
+                            <img src="../imagenes/camiones.jpg" width="100" height="75" alt="Camiones en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Camiones en Mexico" title="Camiones en Mexico">Camiones</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Camionetas en Mexico" title="Camionetas en Mexico">
+                            <img src="../imagenes/camionetas.jpg" width="100" height="75" alt="Camionetas en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Camionetas en Mexico" title="Camionetas en Mexico">Camionetas</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Carros de golf en Mexico" title="Carros de golf en Mexico">
+                            <img src="../imagenes/carros-de-golf.jpg" width="100" height="75" alt="Carros de golf en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Carros de golf en Mexico" title="Carros de golf en Mexico">Carros de golf</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Casas rodantes en Mexico" title="Casas rodantes en Mexico">
+                            <img src="../imagenes/casas-rodantes.jpg" width="100" height="75" alt="Casas rodantes en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Casas rodantes en Mexico" title="Casas rodantes en Mexico">Casas rodantes</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Concesionarios en Mexico" title="Concesionarios en Mexico">
+                            <img src="../imagenes/concesionarios.jpg" width="100" height="75" alt="Concesionarios en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Concesionarios en Mexico" title="Concesionarios en Mexico">Concesionarios</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Cuatriciclos en Mexico" title="Cuatriciclos en Mexico">
+                            <img src="../imagenes/quads.jpg" width="100" height="75" alt="Cuatriciclos en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Cuatriciclos en Mexico" title="Cuatriciclos en Mexico">Cuatriciclos</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Estacionamientos en Mexico" title="Estacionamientos en Mexico">
+                            <img src="../imagenes/estacionamientos.jpg" width="100" height="75" alt="Estacionamientos en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Estacionamientos en Mexico" title="Estacionamientos en Mexico">Estacionamientos</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Estaciones de servicio en Mexico" title="Estaciones de servicio en Mexico">
+                            <img src="../imagenes/estaciones-de-servicios.jpg" width="100" height="75" alt="Estaciones de servicio en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Estaciones de servicio en Mexico" title="Estaciones de servicio en Mexico">Estaciones de servicio</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Food trucks en Mexico" title="Food trucks en Mexico">
+                            <img src="../imagenes/food-trucks.jpg" width="100" height="75" alt="Food trucks en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Food trucks en Mexico" title="Food trucks en Mexico">Food trucks</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Gasolineras en Mexico" title="Gasolineras en Mexico">
+                            <img src="../imagenes/gasolineras.jpg" width="100" height="75" alt="Gasolineras en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Gasolineras en Mexico" title="Gasolineras en Mexico">Gasolineras</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Gomerías en Mexico" title="Gomerías en Mexico">
+                            <img src="../imagenes/gomerias.jpg" width="100" height="75" alt="Gomerías en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Gomerías en Mexico" title="Gomerías en Mexico">Gomerías</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Grúas en Mexico" title="Grúas en Mexico">
+                            <img src="../imagenes/gruas.jpg" width="100" height="75" alt="Grúas en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Grúas en Mexico" title="Grúas en Mexico">Grúas</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Maquinaria pesada en Mexico" title="Maquinaria pesada en Mexico">
+                            <img src="../imagenes/maquinaria-pesada.jpg" width="100" height="75" alt="Maquinaria pesada en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Maquinaria pesada en Mexico" title="Maquinaria pesada en Mexico">Maquinaria pesada</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Motorhomes en Mexico" title="Motorhomes en Mexico">
+                            <img src="../imagenes/motorhomes.jpg" width="100" height="75" alt="Motorhomes en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Motorhomes en Mexico" title="Motorhomes en Mexico">Motorhomes</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Motos en Mexico" title="Motos en Mexico">
+                            <img src="../imagenes/motos.jpg" width="100" height="75" alt="Motos en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Motos en Mexico" title="Motos en Mexico">Motos</a>
+                    </li>
+                    <li class="foto">
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Talleres mecánicos en Mexico" title="Talleres mecánicos en Mexico">
+                            <img src="../imagenes/talleres-mecanicos.jpg" width="100" height="75" alt="Talleres mecánicos en Mexico" loading="lazy">
+                        </a>
+                        <a href="/argentino.demo/mexico/resultadosMexico.html?q=Talleres mecánicos en Mexico" title="Talleres mecánicos en Mexico">Talleres mecánicos</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="iconos_frases_inicio">
+                <div class="item">
+                    <a href="/argentino.demo/home/alimentacion" title="Alimentación en Mexico" style="background-color:#9BB9FF;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#alimentacion"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/alimentacion" title="Alimentación en Mexico">Alimentación</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/home/resultadosCategorias.html?q=Bancos y seguros en Mexico" title="Bancos y seguros en Mexico" style="background-color:#F8DD3C;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#bancos_seguros"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/resultadosCategorias.html?q=Bancos y seguros en Mexico" title="Bancos y seguros en Mexico">Bancos y seguros</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/home/belleza+y+estetica" title="Belleza y estética en Mexico" style="background-color:#23E5D8;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#belleza_estetica"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/belleza+y+estetica" title="Belleza y estética en Mexico">Belleza y estética</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/home/compras" title="Compras en Mexico" style="background-color:#D2B982;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#compras"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/compras" title="Compras en Mexico">Compras</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/home/construccion" title="Construcción en Mexico" style="background-color:#8DF1EE;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#construccion"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/construccion" title="Construcción en Mexico">Construcción</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/home/deportes" title="Deportes en Mexico" style="background-color:#CDDCFF;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#deportes"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/deportes" title="Deportes en Mexico">Deportes</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/home/educacion" title="Educación en Mexico" style="background-color:#FF645C;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#educacion"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/educacion" title="Educación en Mexico">Educación</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/resultados.html?q=Guia gastronomica en Mexico" title="Guía gastronómica en Mexico" style="background-color:#FFE894;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#guia_gastronomica"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/resultados.html?q=Guia gastronomica en Mexico" title="Guía gastronómica en Mexico">Guía gastronómica</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/home/hogar+y+jardin" title="Hogar y jardín en Mexico" style="background-color:#9BB9FF;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#hogar_jardin"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/hogar+y+jardin" title="Hogar y jardín en Mexico">Hogar y jardín</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/home/inmobiliarias" title="Inmobiliarias en Mexico" style="background-color:#F8DD3C;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#inmobiliarias"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/inmobiliarias" title="Inmobiliarias en Mexico">Inmobiliarias</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/home/mascotas" title="Mascotas en Mexico" style="background-color:#23E5D8;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#mascotas"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/mascotas" title="Mascotas en Mexico">Mascotas</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/home/motor" title="Motor en Mexico" style="background-color:#D2B982;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#motor"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/motor" title="Motor en Mexico">Motor</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/home/profesionales" title="Profesionales en Mexico" style="background-color:#8DF1EE;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#profesionales"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/profesionales" title="Profesionales en Mexico">Profesionales</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/home/resultadosCategorias.html?q=Servicios publicos en Mexico" title="Servicios públicos en Mexico" style="background-color:#CDDCFF;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#servicios_publicos"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/resultadosCategorias.html?q=Servicios publicos en Mexico" title="Servicios públicos en Mexico">Servicios públicos</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/home/ocio+y+fiestas" title="Ocio y fiestas en Mexico" style="background-color:#FF645C;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#ocio_fiestas"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/ocio+y+fiestas" title="Ocio y fiestas en Mexico">Ocio y fiestas</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/home/salud" title="Salud en Mexico" style="background-color:#FFE894;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#salud"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/salud" title="Salud en Mexico">Salud</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/home/transportes" title="Transportes en Mexico" style="background-color:#9BB9FF;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#transportes"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/transportes" title="Transportes en Mexico">Transportes</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino.demo/home/viajes+y+hoteles" title="viajes+y+hoteles en Mexico" style="background-color:#F8DD3C;">
+                        <svg>
+                            <use xlink:href="imagenes/taxonomia.svg?3#viajes_hoteles"></use>
+                        </svg>
+                    </a>
+                    <a href="/argentino.demo/home/viajes+y+hoteles" title="viajes+y+hoteles en Mexico">Viajes y Hoteles</a>
+                </div>
+            </div>
+        </div>
+        <div id="pie">
+            <p>
+                <a href="about-us" rel="nofollow">Acerca de</a>
+                - <a href="faqs" rel="nofollow">Preguntas frecuentes</a>
+                - <a href="terms" rel="nofollow">Condiciones de uso</a>
+            </p>
+        </div>
+        <div id="token" data-token="690852FE1F5927266A670519643D07CE13670A136926FC685921132A3A5D510959639A166D081B69558B4" style="display:none;"></div>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-FL113DLLF8"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-FL113DLLF8");
+        </script>
+        <script src="../js/funciones.js" defer></script>
+    </body>
+</html>

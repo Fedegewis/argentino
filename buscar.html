@@ -5,9 +5,10 @@
     <title>Buscador</title>
     <style>
         body { font-family: Arial, sans-serif; padding: 20px; }
-        #resultado { margin-top: 20px; font-weight: bold; }
+        #resultado { margin-top: 20px; font-weight: bold; color: #b00; }
         input[type="text"] { padding: 8px; width: 300px; }
         button { padding: 8px 12px; }
+        small { display:block; margin-top:8px; color:#666; }
     </style>
 </head>
 <body>
@@ -19,9 +20,9 @@
     </form>
 
     <div id="resultado"></div>
+    <small>Abre la consola (F12) para ver logs de depuración.</small>
 
     <script>
-        // Lista de páginas en la carpeta "mexico/"
         const paginas = [
             "aberturas","abogados","accesorios+para+baño","aceites+vegetales","adiestramiento+de+perros",
             "adopcion+de+mascotas","agencias+de+modelaje","agencias+de+publicidad","aislantes","albaniles",
@@ -45,25 +46,91 @@
             "peluquerias+de+mascotas","piercings","tatuajes","unas","venta+de+inmuebles","veterinarias"
         ];
 
-        // Función principal para manejar la búsqueda
-        function handleSearch(query) {
-            // Normaliza el texto de búsqueda
-            const normalizedQuery = query.trim().toLowerCase().replace(/\s+/g, "+");
+        function normalizeInput(q) {
+            return (q || "").trim().toLowerCase();
+        }
 
-            // Busca coincidencia exacta
-            const pagina = paginas.find(p => p === normalizedQuery);
+        // Busca una entrada en "paginas" tratando '+' como espacio y viceversa
+        function findPaginaForQuery(query) {
+            const q = normalizeInput(query);
+            if (!q) return null;
+            // variante con '+' (como están las entradas)
+            const plusVariant = q.replace(/\s+/g, "+");
+            for (const p of paginas) {
+                const pSpace = p.replace(/\+/g, " ").toLowerCase();
+                if (p === plusVariant) return p;            // coincidencia exacta con plus
+                if (pSpace === q) return p;                 // coincidencia exacta con espacios
+                if (pSpace.includes(q)) return p;           // coincidencia parcial (espacios)
+                if (p.includes(plusVariant)) return p;      // coincidencia parcial (plus)
+            }
+            return null;
+        }
 
+        // Intentar redirigir probando varias rutas candidatas (comprueba existencia vía fetch HEAD/GET)
+        async function redirectToExisting(pagina, resultadoElem) {
+            const baseCandidates = [
+                `/argentino/mexico/${pagina}.html`,
+                `/argentino/mexico/${pagina}`,
+                `/argentino/mexico/${pagina}/`,
+                `/mexico/${pagina}.html`,
+                `/mexico/${pagina}`,
+                `/mexico/${pagina}/`
+            ];
+
+            console.log("Intentando redirigir a las siguientes rutas:", baseCandidates);
+
+            for (const url of baseCandidates) {
+                try {
+                    // probamos con HEAD (más liviano). Si falla el HEAD intentamos GET
+                    let resp = await fetch(url, { method: 'HEAD' });
+                    console.log("HEAD", url, "=>", resp.status);
+                    if (resp.ok) {
+                        window.location.href = url;
+                        return;
+                    }
+                    // Si HEAD devuelve 405 o similar, intentar GET (algunos hosts no permiten HEAD)
+                    if (resp.status === 405 || resp.status === 0 || !resp.ok) {
+                        try {
+                            let resp2 = await fetch(url, { method: 'GET' });
+                            console.log("GET", url, "=>", resp2.status);
+                            if (resp2.ok) {
+                                window.location.href = url;
+                                return;
+                            }
+                        } catch (errGet) {
+                            console.log("GET error en", url, errGet);
+                        }
+                    }
+                } catch (err) {
+                    console.log("fetch error en", url, err);
+                }
+            }
+
+            // Si ninguna ruta existe:
+            resultadoElem.textContent = "No se encontró la página para: " + pagina + ". Probé estas rutas (ver consola):";
+            console.warn("No se encontró ninguna ruta válida. Rutas probadas:", baseCandidates);
+        }
+
+        async function handleSearch(query) {
             const resultado = document.getElementById("resultado");
+            resultado.textContent = "";
+
+            const normalized = normalizeInput(query);
+            console.log("Consulta recibida:", query, "=> normalizada:", normalized);
+
+            const pagina = findPaginaForQuery(query);
+            console.log("Página encontrada (valor interno):", pagina);
 
             if (pagina) {
-                // Redirige al archivo HTML dentro de /argentino/mexico/
-                window.location.href = "/argentino/mexico/" + pagina + ".html";
+                // Intentamos redirigir a la primera ruta que exista.
+                await redirectToExisting(pagina, resultado);
             } else {
                 resultado.textContent = "No se encontraron resultados para: " + query;
+                console.log("No hay coincidencias en el array para:", normalized);
             }
         }
 
-        // Manejar el envío del formulario
+        // Envío del formulario local
         const form = document.getElementById("form-buscar");
         const input = document.getElementById("buscar");
         form.addEventListener("submit", function(e) {
@@ -71,11 +138,12 @@
             handleSearch(input.value);
         });
 
-        // Manejar la búsqueda desde la URL al cargar la página
+        // Si la página fue llamada con ?b=xxx
         const urlParams = new URLSearchParams(window.location.search);
         const urlQuery = urlParams.get('b');
-
         if (urlQuery) {
+            // mostramos el valor en el input y lanzamos la búsqueda automáticamente
+            input.value = urlQuery;
             handleSearch(urlQuery);
         }
     </script>

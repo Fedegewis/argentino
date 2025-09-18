@@ -47,16 +47,17 @@
 
         // Función principal para manejar la búsqueda
         function handleSearch(query) {
-            // Normaliza el texto de búsqueda: quita espacios, convierte a minúsculas y reemplaza espacios con '+'
+            // Normaliza el texto de búsqueda
             const normalizedQuery = query.trim().toLowerCase().replace(/\s+/g, "+");
-            
-            // Busca la página que coincida exactamente con la consulta normalizada
+
+            // Busca coincidencia exacta
             const pagina = paginas.find(p => p === normalizedQuery);
-            
+
             const resultado = document.getElementById("resultado");
 
             if (pagina) {
-                window.location.href = "/argentino/mexico/" + pagina;
+                // Redirige al archivo HTML dentro de /argentino/mexico/
+                window.location.href = "/argentino/mexico/" + pagina + ".html";
             } else {
                 resultado.textContent = "No se encontraron resultados para: " + query;
             }

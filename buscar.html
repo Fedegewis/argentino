@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Buscador</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    #resultado { margin-top: 20px; font-weight: bold; }
+    input[type="text"] { padding: 8px; width: 300px; }
+    button { padding: 8px 12px; }
+  </style>
+</head>
+<body>
+  <h1>Buscar en México</h1>
+
+  <form id="form-buscar">
+    <input type="text" id="buscar" placeholder="¿Qué buscas?" maxlength="100">
+    <button type="submit">Buscar</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    // Lista de páginas en la carpeta "mexico/"
+    const paginas = [
+      "aberturas","abogados","accesorios+para+baño","aceites+vegetales","adiestramiento+de+perros",
+      "adopcion+de+mascotas","agencias+de+modelaje","agencias+de+publicidad","aislantes","albaniles",
+      "alfombras","alimentos+congelados","alimentos+dieteticos","alimentos+en+conserva",
+      "alimentos+para+mascotas","alimentos+veganos","ambulancias","andamios","anticuarios","arquitectos",
+      "artes+marciales","articulos+de+electricidad","articulos+de+limpieza","articulos+de+peluqueria",
+      "articulos+deportivos","atletismo","autos","autobuses","autoescuelas","autos+chocados","azucar",
+      "ballet","balonmano","banos+portatiles","banos+quimicos","barberias","basquet","bazares",
+      "bebidas+alcoholicas","bebidas+sin+alcohol","bibliotecas","bicicleterias","billares","bowling",
+      "calefaccion+y+ventilacion","camiones","camionetas","carnavales","carnes","carpinteros+de+obra",
+      "carros+de+golf","casas+rodantes","caza+y+pesca","centros+educativos","cereales","chocolate",
+      "ciclismo","cines","circos","clases+de+idiomas","clubes+deportivos","colchoneria","colegios",
+      "comics","concesionarios","conciertos","conejo+mascota","contadores","corseterias",
+      "cortinas+y+persianas","cristalerias","cursos","desfiles+de+modas","discotecas",
+      "disenadores+graficos","droguerias","educacion+artistica","educacion+especial",
+      "educacion+primaria","educacion+privada","educacion+religiosa","educacion+secundaria",
+      "electricistas","electrodomesticos","escribanos","escuelas","estetica+corporal","eventos",
+      "florerias","gatos+mascota","higiene+personal","iluminacion","imprentas",
+      "instrumentos+musicales","jardineria","joyerias","jugueterias","librerias","maquillajes",
+      "marroquinerias","muebles","pajarerias","paseadores+de+perros","peceras","peces","peluquerias",
+      "peluquerias+de+mascotas","piercings","tatuajes","unas","venta+de+inmuebles","veterinarias"
+    ];
+
+    const form = document.getElementById("form-buscar");
+    const input = document.getElementById("buscar");
+    const resultado = document.getElementById("resultado");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const query = input.value.trim().toLowerCase();
+      if (!query) {
+        resultado.textContent = "Por favor, escribe algo para buscar.";
+        return;
+      }
+
+      // Buscar coincidencias
+      const pagina = paginas.find(p => p.toLowerCase().includes(query.replace(/\s+/g, "+")));
+      
+      if (pagina) {
+        window.location.href = "mexico/" + pagina + ".html";
+      } else {
+        resultado.textContent = "No se encontraron resultados para: " + query;
+      }
+    });
+  </script>
+</body>
+</html>

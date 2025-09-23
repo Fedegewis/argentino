@@ -1,74 +1,31 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Buscar</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    #resultado { margin-top: 20px; font-weight: bold; }
-    input { padding: 8px; width: 250px; }
-    button { padding: 8px 12px; margin-left: 5px; cursor: pointer; }
-  </style>
-</head>
-<body>
+<div id="tope3_buscar">
+                    <form id="form-buscar" class="formulario">
+                        <input name="b" id="buscar_tope" type="text" value="busca" maxlength="100" placeholder="¿qué buscas?">
+                    </form>
+                </div>
+            </div>
+        </div>
 
-  <h1>Buscador</h1>
-  <form id="form-buscar">
-    <input type="text" name="b" id="buscar" placeholder="¿Qué buscas?">
-    <button type="submit">Buscar</button>
-  </form>
+                <script>
+                document.getElementById('form-buscar').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    let busqueda = document.getElementById('buscar_tope').value.trim();
+                    if(busqueda) {
+                        busqueda = busqueda.replace(/\s+/g, '+'); // espacios por +
+                        const url = 'https://fedegewis.github.io/argentino/mexico/' + busqueda;
 
-  <div id="resultado"></div>
-
-  <script>
-    const baseURL = "https://fedegewis.github.io/argentino/mexico/";
-
-    // Lista de páginas disponibles (armada con tus categorías)
-    const paginas = [
-      "aberturas","abogados","accesorios+para+baño","aceites+vegetales","adiestramiento+de+perros",
-      "adopcion+de+mascotas","agencias+de+modelaje","agencias+de+publicidad","aislantes","albaniles",
-      "alfombras","alimentos+congelados","alimentos+dieteticos","alimentos+en+conserva",
-      "alimentos+para+mascotas","alimentos+veganos","ambulancias","andamios","anticuarios","arquitectos",
-      "artes+marciales","articulos+de+electricidad","articulos+de+limpieza","articulos+de+peluqueria",
-      "articulos+deportivos","atletismo","autos","autobuses","autoescuelas","autos+chocados","azucar",
-      "ballet","balonmano","banos+portatiles","banos+quimicos","barberias","basquet","bazares",
-      "bebidas+alcoholicas","bebidas+sin+alcohol","bibliotecas","bicicleterias","billares","bowling",
-      "calefaccion+y+ventilacion","camiones","camionetas","carnavales","carnes","carpinteros+de+obra",
-      "carros+de+golf","casas+rodantes","caza+y+pesca","centros+educativos","cereales","chocolate",
-      "ciclismo","cines","circos","clases+de+idiomas","clubes+deportivos","colchoneria","colegios",
-      "comics","concesionarios","conciertos","conejo+mascota","contadores","corseterias",
-      "cortinas+y+persianas","cristalerias","cursos","desfiles+de+modas","discotecas",
-      "disenadores+graficos","droguerias","educacion+artistica","educacion+especial",
-      "educacion+primaria","educacion+privada","educacion+religiosa","educacion+secundaria",
-      "electricistas","electrodomesticos","escribanos","escuelas","estetica+corporal","eventos",
-      "florerias","gatos+mascota","higiene+personal","iluminacion","imprentas",
-      "instrumentos+musicales","jardineria","joyerias","jugueterias","librerias","maquillajes",
-      "marroquinerias","muebles","pajarerias","paseadores+de+perros","peceras","peces","peluquerias",
-      "peluquerias+de+mascotas","piercings","tatuajes","unas","venta+de+inmuebles","veterinarias"
-    ];
-
-    const form = document.getElementById("form-buscar");
-    const input = document.getElementById("buscar");
-    const resultado = document.getElementById("resultado");
-
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      let valor = input.value.trim().toLowerCase();
-
-      // Buscar coincidencia exacta
-      let pagina = paginas.find(p => p.toLowerCase() === valor);
-
-      if (pagina) {
-        // Para la URL, reemplazamos espacios por "+"
-        let urlPagina = baseURL + pagina.replace(/\s+/g, "+");
-        window.location.href = urlPagina;
-      } else {
-        resultado.textContent = "No se encontró la página: " + valor;
-      }
-    });
-  </script>
-
-</body>
-</html>
->
+                        // Verificar si la página existe
+                        fetch(url, { method: 'HEAD' })
+                            .then(response => {
+                                if(response.ok) {
+                                    window.location.href = url; // si existe, ir a la página
+                                } else {
+                                    window.location.href = 'https://fedegewis.github.io/argentino/'; // si no, al inicio
+                                }
+                            })
+                            .catch(() => {
+                                window.location.href = 'https://fedegewis.github.io/argentino/'; // si hay error, al inicio
+                            });
+                    }
+                });
+                </script> 

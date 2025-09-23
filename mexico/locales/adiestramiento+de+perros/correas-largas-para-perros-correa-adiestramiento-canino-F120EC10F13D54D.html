@@ -24,15 +24,37 @@ body,td,th{font-family:roboto,arial,helvetica,sans-serif;font-size:14px;color:#3
 <div class="tope2" id="tope2">
     <div class="tope2_contenedor">
         <div class="tope2_logo"><a href="/argentino/"><img srcset="../../../logo.svg.png" sizes="(max-width: 767.98px) 132px, (min-width: 768px) 160px, 132px" src="../../../logo.svg.png" alt="Logo mexicano" width="132" height="33"> </a></div>
-        <div id="tope2_buscar">
-            <form method="post" action="buscar.asp" class="formulario">
-                <input name="u" type="hidden" value="almagro">
-                <input name="d" type="hidden" value="anuncio">
-                <input name="b" id="buscar_tope" type="text" value="" maxlength="100" placeholder="¿qué buscas?">
-                <a href="javascript:;" onclick="document.querySelector('#tope2_buscar form').submit();"><svg alt="search"><use xlink:href="imagenes/sprite.svg?3#search"></use></svg></a>
-            </form>
+        <div id="tope3_buscar">
+                    <form id="form-buscar" class="formulario">
+                        <input name="b" id="buscar_tope" type="text" value="buscador" maxlength="100" placeholder="¿qué buscas?">
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="tope2_micuenta"><a href="private/login?utm_source=landing&amp;utm_medium=none&amp;utm_campaign=login" rel="nofollow" title="Mi cuenta"><svg><use xlink:href="imagenes/sprite.svg?3#person"></use></svg><span>Mi cuenta</span></a></div>
+
+                <script>
+                document.getElementById('form-buscar').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    let busqueda = document.getElementById('buscar_tope').value.trim();
+                    if(busqueda) {
+                        busqueda = busqueda.replace(/\s+/g, '+'); // espacios por +
+                        const url = 'https://fedegewis.github.io/argentino/mexico/' + busqueda;
+
+                        // Verificar si la página existe
+                        fetch(url, { method: 'HEAD' })
+                            .then(response => {
+                                if(response.ok) {
+                                    window.location.href = url; // si existe, ir a la página
+                                } else {
+                                    window.location.href = 'https://fedegewis.github.io/argentino/'; // si no, al inicio
+                                }
+                            })
+                            .catch(() => {
+                                window.location.href = 'https://fedegewis.github.io/argentino/'; // si hay error, al inicio
+                            });
+                    }
+                });
+                </script>         <div class="tope2_micuenta"><a href="private/login?utm_source=landing&amp;utm_medium=none&amp;utm_campaign=login" rel="nofollow" title="Mi cuenta"><svg><use xlink:href="imagenes/sprite.svg?3#person"></use></svg><span>Mi cuenta</span></a></div>
         <div class="tope2_publicar"><a href="post-ad?utm_source=item&amp;utm_medium=form&amp;utm_campaign=postad" class="botonpublicar"><span>+</span>Publicar</a></div>
     </div>
 </div>

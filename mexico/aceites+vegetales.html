@@ -1079,11 +1079,13 @@
                 </div>
                 <script>
                     document.getElementById('form-buscar').addEventListener('submit', function(e) {
-                        e.preventDefault(); // evita que el formulario se envíe normalmente
-                        const busqueda = document.getElementById('buscar_tope').value.trim();
+                        e.preventDefault();
+                        let busqueda = document.getElementById('buscar_tope').value.trim();
                         if(busqueda) {
-                            const url = 'https://fedegewis.github.io/argentino/mexico/' + encodeURIComponent(busqueda);
-                            window.location.href = url; // redirige a la URL deseada
+                            // Reemplaza espacios por +
+                            busqueda = busqueda.replace(/\s+/g, '+');
+                            const url = 'https://fedegewis.github.io/argentino/mexico/' + busqueda;
+                            window.location.href = url;
                         }
                     });
                 </script>

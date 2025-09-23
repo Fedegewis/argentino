@@ -1077,6 +1077,16 @@
                         </button>
                     </form>
                 </div>
+                <script>
+                    document.getElementById('form-buscar').addEventListener('submit', function(e) {
+                        e.preventDefault(); // evita que el formulario se envíe normalmente
+                        const busqueda = document.getElementById('buscar_tope').value.trim();
+                        if(busqueda) {
+                            const url = 'https://fedegewis.github.io/argentino/mexico/' + encodeURIComponent(busqueda);
+                            window.location.href = url; // redirige a la URL deseada
+                        }
+                    });
+                </script>
                 <div class="tope2_micuenta">
                     <a href="private/login?utm_source=landing&utm_medium=none&utm_campaign=login" rel="nofollow" title="Mi cuenta">
                         <svg>

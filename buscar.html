@@ -1,95 +1,142 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <title>Buscador</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body{font-family: Arial, sans-serif;padding:20px}
+    #resultado{margin-top:12px;font-weight:600;color:#b00}
+    small{display:block;margin-top:8px;color:#666}
+    a.fallback{display:inline-block;margin-top:8px}
+  </style>
 </head>
 <body>
-  <!-- Reutilizo tu mismo buscador -->
+  <!-- El form que usás en todas las páginas -->
   <div id="tope2_buscar">
     <form id="form-buscar" method="get" action="/buscar.html" class="formulario">
       <input name="b" id="buscar_tope" type="text" maxlength="100" placeholder="¿qué buscas?">
-      <button type="submit">
-        <svg alt="search">
-          <use xlink:href="imagenes/sprite.svg?3#search"></use>
-        </svg>
+      <button type="submit" aria-label="buscar">
+        <!-- tu SVG aquí -->
+        <svg width="18" height="18" role="img" aria-hidden="true"><use xlink:href="imagenes/sprite.svg?3#search"></use></svg>
       </button>
     </form>
   </div>
 
-  <script>
-    const paginas = [
-      "aberturas","abogados","accesorios+para+baño","aceites+vegetales","adiestramiento+de+perros",
-      "adopcion+de+mascotas","agencias+de+modelaje","agencias+de+publicidad","aislantes","albaniles",
-      "alfombras","alimentos+congelados","alimentos+dieteticos","alimentos+en+conserva",
-      "alimentos+para+mascotas","alimentos+veganos","ambulancias","andamios","anticuarios","arquitectos",
-      "artes+marciales","articulos+de+electricidad","articulos+de+limpieza","articulos+de+peluqueria",
-      "articulos+deportivos","atletismo","autos","autobuses","autoescuelas","autos+chocados","azucar",
-      "ballet","balonmano","banos+portatiles","banos+quimicos","barberias","basquet","bazares",
-      "bebidas+alcoholicas","bebidas+sin+alcohol","bibliotecas","bicicleterias","billares","bowling",
-      "calefaccion+y+ventilacion","camiones","camionetas","carnavales","carnes","carpinteros+de+obra",
-      "carros+de+golf","casas+rodantes","caza+y+pesca","centros+educativos","cereales","chocolate",
-      "ciclismo","cines","circos","clases+de+idiomas","clubes+deportivos","colchoneria","colegios",
-      "comics","concesionarios","conciertos","conejo+mascota","contadores","corseterias",
-      "cortinas+y+persianas","cristalerias","cursos","desfiles+de+modas","discotecas",
-      "disenadores+graficos","droguerias","educacion+artistica","educacion+especial",
-      "educacion+primaria","educacion+privada","educacion+religiosa","educacion+secundaria",
-      "electricistas","electrodomesticos","escribanos","escuelas","estetica+corporal","eventos",
-      "florerias","gatos+mascota","higiene+personal","iluminacion","imprentas",
-      "instrumentos+musicales","jardineria","joyerias","jugueterias","librerias","maquillajes",
-      "marroquinerias","muebles","pajarerias","paseadores+de+perros","peceras","peces","peluquerias",
-      "peluquerias+de+mascotas","piercings","tatuajes","unas","venta+de+inmuebles","veterinarias"
-    ];
+  <div id="resultado"></div>
+  <small>Abre la consola (F12) para ver logs de depuración.</small>
 
-    function normalizeInput(q) {
-      return (q || "").trim().toLowerCase();
-    }
+<script>
+/* === lista de categorías (igual a la tuya) === */
+const paginas = [
+  "aberturas","abogados","accesorios+para+baño","aceites+vegetales","adiestramiento+de+perros",
+  "adopcion+de+mascotas","agencias+de+modelaje","agencias+de+publicidad","aislantes","albaniles",
+  "alfombras","alimentos+congelados","alimentos+dieteticos","alimentos+en+conserva",
+  "alimentos+para+mascotas","alimentos+veganos","ambulancias","andamios","anticuarios","arquitectos",
+  "artes+marciales","articulos+de+electricidad","articulos+de+limpieza","articulos+de+peluqueria",
+  "articulos+deportivos","atletismo","autos","autobuses","autoescuelas","autos+chocados","azucar",
+  "ballet","balonmano","banos+portatiles","banos+quimicos","barberias","basquet","bazares",
+  "bebidas+alcoholicas","bebidas+sin+alcohol","bibliotecas","bicicleterias","billares","bowling",
+  "calefaccion+y+ventilacion","camiones","camionetas","carnavales","carnes","carpinteros+de+obra",
+  "carros+de+golf","casas+rodantes","caza+y+pesca","centros+educativos","cereales","chocolate",
+  "ciclismo","cines","circos","clases+de+idiomas","clubes+deportivos","colchoneria","colegios",
+  "comics","concesionarios","conciertos","conejo+mascota","contadores","corseterias",
+  "cortinas+y+persianas","cristalerias","cursos","desfiles+de+modas","discotecas",
+  "disenadores+graficos","droguerias","educacion+artistica","educacion+especial",
+  "educacion+primaria","educacion+privada","educacion+religiosa","educacion+secundaria",
+  "electricistas","electrodomesticos","escribanos","escuelas","estetica+corporal","eventos",
+  "florerias","gatos+mascota","higiene+personal","iluminacion","imprentas",
+  "instrumentos+musicales","jardineria","joyerias","jugueterias","librerias","maquillajes",
+  "marroquinerias","muebles","pajarerias","paseadores+de+perros","peceras","peces","peluquerias",
+  "peluquerias+de+mascotas","piercings","tatuajes","unas","venta+de+inmuebles","veterinarias"
+];
 
-    function findPaginaForQuery(query) {
-      const q = normalizeInput(query);
-      if (!q) return null;
-      const plusVariant = q.replace(/\s+/g, "+");
-      for (const p of paginas) {
-        const pSpace = p.replace(/\+/g, " ").toLowerCase();
-        if (p === plusVariant) return p;
-        if (pSpace === q) return p;
-        if (pSpace.includes(q)) return p;
-        if (p.includes(plusVariant)) return p;
-      }
-      return null;
-    }
+function normalizeInput(q){ return (q||"").trim().toLowerCase(); }
 
-    async function handleSearch(query) {
-      const pagina = findPaginaForQuery(query);
-      if (pagina) {
-        const base = "https://fedegewis.github.io/argentino/mexico/";
-        const candidatos = [
-          `${base}${pagina}`,
-          `${base}${pagina}.html`
-        ];
-        for (const url of candidatos) {
-          try {
-            const resp = await fetch(url, { method: "HEAD" });
-            if (resp.ok) {
-              window.location.href = url;
-              return;
-            }
-          } catch (err) {
-            console.log("Error al probar:", url, err);
-          }
-        }
-        alert("No se encontró la página para: " + pagina);
-      } else {
-        alert("No se encontraron resultados para: " + query);
-      }
-    }
+function findPaginaForQuery(query){
+  const q = normalizeInput(query);
+  if (!q) return null;
+  const plusVariant = q.replace(/\s+/g, "+");
+  for (const p of paginas){
+    const pSpace = p.replace(/\+/g," ").toLowerCase();
+    if (p === plusVariant) return p;
+    if (pSpace === q) return p;
+    if (pSpace.includes(q)) return p;
+    if (p.includes(plusVariant)) return p;
+  }
+  return null;
+}
 
-    // Detectar ?b= en la URL y redirigir
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlQuery = urlParams.get("b");
-    if (urlQuery) {
-      handleSearch(urlQuery);
-    }
-  </script>
+async function tryFetchOk(url){
+  try{
+    console.log("Comprobando:", url);
+    const r = await fetch(url, { method: 'GET', cache: 'no-store' });
+    console.log("=> status", r.status, "ok?", r.ok);
+    return r.ok;
+  }catch(e){
+    console.log("Error fetch", url, e);
+    return false;
+  }
+}
+
+async function handleSearch(query){
+  const resultado = document.getElementById("resultado");
+  resultado.textContent = "";
+  const pagina = findPaginaForQuery(query);
+  if (!pagina){
+    resultado.innerHTML = `No se encontraron resultados para: <b>${query}</b>`;
+    return;
+  }
+
+  const display = pagina.replace(/\+/g," ");
+  resultado.innerHTML = `Categoría encontrada: <b>${display}</b><br>Intentando abrir...`;
+  console.log("Página interna encontrada:", pagina);
+
+  // base construido a partir del origen actual para evitar errores de ruta
+  const base = location.origin + "/argentino/mexico/";
+  const urlClean = base + pagina;          // /argentino/mexico/azucar
+  const urlHtml  = base + pagina + ".html"; // /argentino/mexico/azucar.html
+
+  // 1) probar la ruta "limpia"
+  if (await tryFetchOk(urlClean)) {
+    console.log("Redirigiendo a (limpia):", urlClean);
+    window.location.href = urlClean;
+    return;
+  }
+
+  // 2) probar la .html
+  if (await tryFetchOk(urlHtml)) {
+    console.log("Redirigiendo a (.html):", urlHtml);
+    window.location.href = urlHtml;
+    return;
+  }
+
+  // 3) fallback — mostrar enlaces para abrir manualmente (útil si fetch está bloqueado por CSP)
+  resultado.innerHTML = `<div>No se pudo abrir automáticamente la página. Probá uno de estos enlaces:</div>
+    <a class="fallback" href="${urlClean}" target="_blank" rel="noopener">${urlClean}</a><br/>
+    <a class="fallback" href="${urlHtml}" target="_blank" rel="noopener">${urlHtml}</a>
+    <div style="margin-top:8px;color:#666">Si esto falla, fijate la ruta exacta y la diferencia entre mayúsculas/minúsculas en el nombre del archivo.</div>`;
+  console.warn("No se encontró ninguna de las dos variantes para:", pagina);
+}
+
+/* - Si la URL trae ?b=xxxx se procesa automáticamente - */
+const urlParams = new URLSearchParams(window.location.search);
+const urlQuery = urlParams.get("b");
+if (urlQuery) {
+  document.getElementById("buscar_tope").value = urlQuery;
+  // ejecutamos sin recargar
+  handleSearch(urlQuery);
+}
+
+/* - Interceptar envío del formulario para manejarlo en esta página sin recargar - */
+document.getElementById("form-buscar").addEventListener("submit", function(evt){
+  evt.preventDefault();
+  const q = document.getElementById("buscar_tope").value;
+  // Actualizamos la URL visible (opcional) sin recargar:
+  const newUrl = location.pathname + '?b=' + encodeURIComponent(q);
+  if (history && history.replaceState) history.replaceState({}, "", newUrl);
+  handleSearch(q);
+});
+</script>
 </body>
 </html>

@@ -50,87 +50,63 @@
             return (q || "").trim().toLowerCase();
         }
 
-        // Busca una entrada en "paginas" tratando '+' como espacio y viceversa
+        // Busca coincidencia en el array
         function findPaginaForQuery(query) {
             const q = normalizeInput(query);
             if (!q) return null;
-            // variante con '+' (como están las entradas)
             const plusVariant = q.replace(/\s+/g, "+");
             for (const p of paginas) {
                 const pSpace = p.replace(/\+/g, " ").toLowerCase();
-                if (p === plusVariant) return p;            // coincidencia exacta con plus
-                if (pSpace === q) return p;                 // coincidencia exacta con espacios
-                if (pSpace.includes(q)) return p;           // coincidencia parcial (espacios)
-                if (p.includes(plusVariant)) return p;      // coincidencia parcial (plus)
+                if (p === plusVariant) return p;
+                if (pSpace === q) return p;
+                if (pSpace.includes(q)) return p;
+                if (p.includes(plusVariant)) return p;
             }
             return null;
         }
 
-        // Intentar redirigir probando varias rutas candidatas (comprueba existencia vía fetch HEAD/GET)
+        // Redirigir probando URL sin y con .html
         async function redirectToExisting(pagina, resultadoElem) {
-            const baseCandidates = [
-                `/argentino/mexico/${pagina}.html`,
-                `/argentino/mexico/${pagina}`,
-                `/argentino/mexico/${pagina}/`,
-                `/mexico/${pagina}.html`,
-                `/mexico/${pagina}`,
-                `/mexico/${pagina}/`
+            const base = "https://fedegewis.github.io/argentino/mexico/";
+            const candidatos = [
+                `${base}${pagina}`,
+                `${base}${pagina}.html`
             ];
 
-            console.log("Intentando redirigir a las siguientes rutas:", baseCandidates);
+            console.log("Probando rutas:", candidatos);
 
-            for (const url of baseCandidates) {
+            for (const url of candidatos) {
                 try {
-                    // probamos con HEAD (más liviano). Si falla el HEAD intentamos GET
-                    let resp = await fetch(url, { method: 'HEAD' });
+                    const resp = await fetch(url, { method: "HEAD" });
                     console.log("HEAD", url, "=>", resp.status);
                     if (resp.ok) {
                         window.location.href = url;
                         return;
                     }
-                    // Si HEAD devuelve 405 o similar, intentar GET (algunos hosts no permiten HEAD)
-                    if (resp.status === 405 || resp.status === 0 || !resp.ok) {
-                        try {
-                            let resp2 = await fetch(url, { method: 'GET' });
-                            console.log("GET", url, "=>", resp2.status);
-                            if (resp2.ok) {
-                                window.location.href = url;
-                                return;
-                            }
-                        } catch (errGet) {
-                            console.log("GET error en", url, errGet);
-                        }
-                    }
                 } catch (err) {
-                    console.log("fetch error en", url, err);
+                    console.log("Error al probar:", url, err);
                 }
             }
 
-            // Si ninguna ruta existe:
-            resultadoElem.textContent = "No se encontró la página para: " + pagina + ". Probé estas rutas (ver consola):";
-            console.warn("No se encontró ninguna ruta válida. Rutas probadas:", baseCandidates);
+            resultadoElem.textContent = "No se encontró la página para: " + pagina;
         }
 
         async function handleSearch(query) {
             const resultado = document.getElementById("resultado");
             resultado.textContent = "";
 
-            const normalized = normalizeInput(query);
-            console.log("Consulta recibida:", query, "=> normalizada:", normalized);
-
             const pagina = findPaginaForQuery(query);
-            console.log("Página encontrada (valor interno):", pagina);
 
             if (pagina) {
-                // Intentamos redirigir a la primera ruta que exista.
+                // Mostrar la categoría encontrada (con espacios en lugar de +)
+                resultado.textContent = "Categoría encontrada: " + pagina.replace(/\+/g, " ");
                 await redirectToExisting(pagina, resultado);
             } else {
                 resultado.textContent = "No se encontraron resultados para: " + query;
-                console.log("No hay coincidencias en el array para:", normalized);
             }
         }
 
-        // Envío del formulario local
+        // Formulario
         const form = document.getElementById("form-buscar");
         const input = document.getElementById("buscar");
         form.addEventListener("submit", function(e) {
@@ -138,11 +114,10 @@
             handleSearch(input.value);
         });
 
-        // Si la página fue llamada con ?b=xxx
+        // Si la URL trae ?b=xxx
         const urlParams = new URLSearchParams(window.location.search);
-        const urlQuery = urlParams.get('b');
+        const urlQuery = urlParams.get("b");
         if (urlQuery) {
-            // mostramos el valor en el input y lanzamos la búsqueda automáticamente
             input.value = urlQuery;
             handleSearch(urlQuery);
         }

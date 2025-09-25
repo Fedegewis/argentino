@@ -541,6 +541,35 @@
                 color: #fff;
                 text-decoration: none
             }
+            /* Estilos para el nuevo div de imágenes (opcional, puedes personalizarlos) */
+            .imagen_slider_home {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                gap: 10px;
+                padding: 20px 10px;
+                flex-wrap: wrap; /* Para que se ajusten en pantallas pequeñas */
+            }
+
+            .imagen_slider_home img {
+                width: 100%; /* Por defecto, para ocupar el ancho total del contenedor en una fila */
+                max-width: 180px; /* Máximo ancho para cada imagen en escritorio */
+                height: auto;
+                border-radius: 8px; /* Opcional: para esquinas redondeadas */
+                object-fit: cover; /* Para asegurar que la imagen cubra el espacio sin distorsionarse */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            }
+
+            @media (max-width: 767.98px) {
+                .imagen_slider_home {
+                    justify-content: center;
+                }
+                .imagen_slider_home img {
+                    max-width: 45%; /* Dos imágenes por fila en móvil */
+                    margin-bottom: 10px;
+                }
+            }
+
         </style>
     </head>
     <body class="argentino">
@@ -687,99 +716,15 @@
                     </a>
                     <a href="/argentino/home/profesionales" title="Profesionales en Mexico">Profesionales</a>
             </div>
-            <div class="ciudades_principales visible_ready">
-                <h2>Ciudades principales</h2>
-            <ul>
-                <li>
-                    <a href="/argentino/resultados.html?q=Ciudad+de+México" title="Ciudad de México">Ciudad de México</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Guadalajara" title="Guadalajara">Guadalajara</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Monterrey" title="Monterrey">Monterrey</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Puebla" title="Puebla">Puebla</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Tijuana" title="Tijuana">Tijuana</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=León" title="León">León</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Ciudad+Juárez" title="Ciudad Juárez">Ciudad Juárez</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Zapopan" title="Zapopan">Zapopan</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Mérida" title="Mérida">Mérida</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Mexicali" title="Mexicali">Mexicali</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Culiacán" title="Culiacán">Culiacán</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Acapulco" title="Acapulco">Acapulco</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Querétaro" title="Querétaro">Querétaro</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=San+Luis+Potosí" title="San Luis Potosí">San Luis Potosí</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Veracruz" title="Veracruz">Veracruz</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Matamoros" title="Matamoros">Matamoros</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Toluca" title="Toluca">Toluca</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Ciudad+Victoria" title="Ciudad Victoria">Ciudad Victoria</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Cuernavaca" title="Cuernavaca">Cuernavaca</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Chilpancingo" title="Chilpancingo">Chilpancingo</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Colima" title="Colima">Colima</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Durango" title="Durango">Durango</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Cancún" title="Cancún">Cancún</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Tepic" title="Tepic">Tepic</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Huatulco" title="Huatulco">Huatulco</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Saltillo" title="Saltillo">Saltillo</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Ciudad+Juárez" title="Ciudad Juárez">Ciudad Juárez</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Tampico" title="Tampico">Tampico</a>
-                </li>
-                <li>
-                    <a href="/argentino/resultados.html?q=Oaxaca" title="Oaxaca">Oaxaca</a>
-                </li>
-            </ul>
-            </ul>
-            </div>
+             <div class="imagen_slider_home">
+                <h2>Lugares Destacados de México</h2>
+                <img src="/imagenes/imagen de mexico.png" alt="Descripción de la imagen 1">
+                <img src="/imagenes/imagen de mexico1.png" alt="Descripción de la imagen 2">
+                <img src="/imagenes/imagen de mexico2.png" alt="Descripción de la imagen 3">
+                <img src="/imagenes/imagen de mexico3.png" alt="Descripción de la imagen 4">
+                <img src="/imagenes/imagen de mexico4.png" alt="Descripción de la imagen 5">
+            </div>
+        </div>
         </div>
         <div id="pie" class="visible_ready">
             <p>

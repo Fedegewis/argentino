@@ -592,7 +592,7 @@
             .iconos_frases_inicio {
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: center;
+                justify-content: center; /* Centrar los ítems */
                 gap: 20px; /* Espacio entre los ítems */
                 padding: 20px 0;
                 max-width: 900px; /* Asegura que el contenedor no sea demasiado ancho */
@@ -604,36 +604,37 @@
                 flex-direction: column; /* Icono arriba, texto abajo */
                 align-items: center; /* Centra el contenido */
                 text-align: center;
-                width: 100px; /* Ancho fijo para cada ítem */
+                width: 100px; /* Ancho fijo para cada ítem, como estaba en la imagen original */
             }
 
-            .iconos_frases_inicio .item a:first-child { /* El primer 'a' es el círculo con el icono */
-                display: flex; /* Usar flexbox para centrar el contenido (emoji) */
-                justify-content: center; /* Centrar horizontalmente */
-                align-items: center; /* Centrar verticalmente */
-                width: 60px; /* Tamaño del círculo del icono */
-                height: 60px;
-                border-radius: 50%; /* Hacerlo circular */
+            /* Estilos para el círculo de color (el primer 'a' dentro de 'item') */
+            .iconos_frases_inicio .item a:first-child {
+                display: flex; /* Añadido: Para centrar el contenido (emoji) */
+                justify-content: center; /* Añadido: Centrar horizontalmente el emoji */
+                align-items: center; /* Añadido: Centrar verticalmente el emoji */
+                width: 64px; /* Tamaño del círculo, como en tus SVG originales */
+                height: 64px; /* Tamaño del círculo, como en tus SVG originales */
+                border-radius: 50%; /* Para que sea un círculo */
                 margin-bottom: 8px; /* Espacio entre el círculo y el texto */
-                text-decoration: none; /* Quitar subrayado del enlace del icono */
-                color: inherit; /* Heredar color para el emoji */
+                text-decoration: none; /* Quitar subrayado del enlace */
+                /* Los background-color se aplican en línea en el HTML */
             }
 
-            /* Estilos específicos para el span del emoji */
+            /* Estilos específicos para el span que contiene el emoji */
             .iconos_frases_inicio .item a:first-child span {
-                font-size: 32px; /* Tamaño del emoji */
-                line-height: 1; /* Asegura que el emoji no tenga espacio extra de línea */
-                color: white; /* Intentar cambiar el color del emoji a blanco */
-                /* text-shadow: 1px 1px 2px rgba(0,0,0,0.3); */ /* Opcional: para que resalte más */
+                font-size: 36px; /* Ajustado: Tamaño del emoji para que se vea bien en 64x64px */
+                line-height: 1; /* Añadido: Elimina espacio extra de línea para mejor centrado */
+                color: #333333; /* El color de los emojis suele ser inherente, pero algunos se pueden cambiar */
             }
 
 
-            .iconos_frases_inicio .item a:last-child { /* El segundo 'a' es el texto de la categoría */
-                font-size: 14px;
-                color: #333333; /* Color de texto más oscuro para que contraste */
+            /* Estilos para el texto de la categoría (el segundo 'a' dentro de 'item') */
+            .iconos_frases_inicio .item a:last-child {
+                font-size: 14px; /* Tamaño del texto de la categoría, como antes */
+                color: #333333; /* Color de texto, como antes */
                 text-decoration: none;
                 line-height: 1.2;
-                max-width: 90px; /* Limita el ancho del texto para que no se extienda demasiado */
+                max-width: 90px;
             }
 
             .iconos_frases_inicio .item a:last-child:hover {
@@ -644,17 +645,17 @@
             /* Ajustes responsivos */
             @media (max-width: 767px) {
                 .iconos_frases_inicio {
-                    gap: 15px; /* Reducir gap en móviles */
+                    gap: 15px;
                 }
                 .iconos_frases_inicio .item {
-                    width: 90px; /* Ancho de item en móvil */
+                    width: 90px;
                 }
                 .iconos_frases_inicio .item a:first-child {
-                    width: 50px; /* Círculo más pequeño en móvil */
-                    height: 50px;
+                    width: 54px; /* Círculo ligeramente más pequeño en móvil */
+                    height: 54px;
                 }
                 .iconos_frases_inicio .item a:first-child span {
-                    font-size: 28px; /* Emoji más pequeño en móvil */
+                    font-size: 30px; /* Emoji más pequeño en móvil */
                 }
                 .iconos_frases_inicio .item a:last-child {
                     font-size: 13px;

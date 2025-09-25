@@ -545,38 +545,46 @@
             .imagen_slider_home {
                 display: flex;
                 flex-wrap: wrap; 
-                justify-content: center; /* Centra las imágenes */
+                justify-content: center;
                 align-items: center; 
-                gap: 15px; /* Espacio entre las imágenes */
+                gap: 10px; /* Mantendremos un gap de 10px para maximizar el tamaño de la imagen */
                 padding: 20px 10px;
-                max-width: 999px; /* Asegura que el contenedor no sea más ancho que la zona de contenido */
-                margin: 20px auto; /* Centra el div completo en la página */
+                max-width: 999px; /* Tu contenedor principal tiene 999px de ancho máximo */
+                margin: 20px auto; 
             }
 
             .imagen_slider_home h2 {
-                width: 100%; /* El título ocupa todo el ancho y se va arriba */
+                width: 100%; 
                 text-align: center;
-                font-size: 20px;
-                margin-bottom: 20px;
+                font-size: 24px; /* Aumentamos aún más el tamaño del título */
+                margin-bottom: 25px; /* Más espacio debajo del título */
             }
 
             .imagen_slider_home img {
-                /* Eliminamos el 'width: 100%;' */
-                width: 210px; /* Damos un ancho fijo a cada imagen (5 * 180px + 4 * 10px de gap = 940px < 999px) */
-                height: 140px; /* Altura fija para uniformidad (opcional, ajusta si lo necesitas) */
-                max-width: none; /* Desactivamos el max-width anterior para que 'width' funcione */
+                /* **IMÁGENES AÚN MÁS GRANDES** */
+                /* Calculo para 5 imágenes con 10px de gap en 999px de max-width:
+                999px (total) - (4 * 10px de gap) = 999 - 40 = 959px disponibles para imágenes.
+                959px / 5 imágenes = 191.8px por imagen. Lo redondeamos a 190px para seguridad. */
+                width: 190px; /* Tamaño optimizado para que quepan 5 en fila dentro de 999px */
+                height: 130px; /* Altura proporcional a 190px de ancho para mantener aspecto */
+                max-width: none;
                 object-fit: cover; 
                 border-radius: 8px; 
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
             }
 
-            /* Estilos Responsivos para que se vean bien en el móvil */
+            /* Estilos Responsivos */
             @media (max-width: 767.98px) {
                 .imagen_slider_home {
-                    justify-content: space-around; /* Distribuir el espacio entre las dos columnas */
+                    justify-content: space-around;
+                    padding: 15px; /* Ajustar padding en móvil */
+                }
+                .imagen_slider_home h2 {
+                    font-size: 20px; /* Ajustar tamaño del título para móvil */
+                    margin-bottom: 15px;
                 }
                 .imagen_slider_home img {
-                    width: 47%; /* Dos imágenes por fila en móvil */
+                    width: 48%; /* Dos imágenes por fila en móvil, ligeramente más grandes */
                     height: auto;
                 }
             }

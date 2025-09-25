@@ -541,32 +541,42 @@
                 color: #fff;
                 text-decoration: none
             }
-            /* Estilos para el nuevo div de imágenes (opcional, puedes personalizarlos) */
+            /* Contenedor principal para el título y las imágenes */
             .imagen_slider_home {
                 display: flex;
-                justify-content: space-around;
-                align-items: center;
-                gap: 10px;
+                flex-wrap: wrap; 
+                justify-content: center; /* Centra las imágenes */
+                align-items: center; 
+                gap: 10px; /* Espacio entre las imágenes */
                 padding: 20px 10px;
-                flex-wrap: wrap; /* Para que se ajusten en pantallas pequeñas */
+                max-width: 999px; /* Asegura que el contenedor no sea más ancho que la zona de contenido */
+                margin: 20px auto; /* Centra el div completo en la página */
+            }
+
+            .imagen_slider_home h2 {
+                width: 100%; /* El título ocupa todo el ancho y se va arriba */
+                text-align: center;
+                margin-bottom: 15px;
             }
 
             .imagen_slider_home img {
-                width: 100%; /* Por defecto, para ocupar el ancho total del contenedor en una fila */
-                max-width: 180px; /* Máximo ancho para cada imagen en escritorio */
-                height: auto;
-                border-radius: 8px; /* Opcional: para esquinas redondeadas */
-                object-fit: cover; /* Para asegurar que la imagen cubra el espacio sin distorsionarse */
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+                /* Eliminamos el 'width: 100%;' */
+                width: 180px; /* Damos un ancho fijo a cada imagen (5 * 180px + 4 * 10px de gap = 940px < 999px) */
+                height: 120px; /* Altura fija para uniformidad (opcional, ajusta si lo necesitas) */
+                max-width: none; /* Desactivamos el max-width anterior para que 'width' funcione */
+                object-fit: cover; 
+                border-radius: 8px; 
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
             }
 
+            /* Estilos Responsivos para que se vean bien en el móvil */
             @media (max-width: 767.98px) {
                 .imagen_slider_home {
-                    justify-content: center;
+                    justify-content: space-around; /* Distribuir el espacio entre las dos columnas */
                 }
                 .imagen_slider_home img {
-                    max-width: 45%; /* Dos imágenes por fila en móvil */
-                    margin-bottom: 10px;
+                    width: 45%; /* Dos imágenes por fila en móvil */
+                    height: auto;
                 }
             }
 

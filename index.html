@@ -588,6 +588,78 @@
                     height: auto;
                 }
             }
+            /* Estilos para los iconos de categoría */
+            .iconos_frases_inicio {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px; /* Espacio entre los ítems */
+                padding: 20px 0;
+                max-width: 900px; /* Asegura que el contenedor no sea demasiado ancho */
+                margin: 0 auto 40px auto; /* Centra el div y añade margen inferior */
+            }
+
+            .iconos_frases_inicio .item {
+                display: flex;
+                flex-direction: column; /* Icono arriba, texto abajo */
+                align-items: center; /* Centra el contenido */
+                text-align: center;
+                width: 100px; /* Ancho fijo para cada ítem */
+            }
+
+            .iconos_frases_inicio .item a:first-child { /* El primer 'a' es el círculo con el icono */
+                display: flex; /* Usar flexbox para centrar el contenido (emoji) */
+                justify-content: center; /* Centrar horizontalmente */
+                align-items: center; /* Centrar verticalmente */
+                width: 60px; /* Tamaño del círculo del icono */
+                height: 60px;
+                border-radius: 50%; /* Hacerlo circular */
+                margin-bottom: 8px; /* Espacio entre el círculo y el texto */
+                text-decoration: none; /* Quitar subrayado del enlace del icono */
+                color: inherit; /* Heredar color para el emoji */
+            }
+
+            /* Estilos específicos para el span del emoji */
+            .iconos_frases_inicio .item a:first-child span {
+                font-size: 32px; /* Tamaño del emoji */
+                line-height: 1; /* Asegura que el emoji no tenga espacio extra de línea */
+                color: white; /* Intentar cambiar el color del emoji a blanco */
+                /* text-shadow: 1px 1px 2px rgba(0,0,0,0.3); */ /* Opcional: para que resalte más */
+            }
+
+
+            .iconos_frases_inicio .item a:last-child { /* El segundo 'a' es el texto de la categoría */
+                font-size: 14px;
+                color: #333333; /* Color de texto más oscuro para que contraste */
+                text-decoration: none;
+                line-height: 1.2;
+                max-width: 90px; /* Limita el ancho del texto para que no se extienda demasiado */
+            }
+
+            .iconos_frases_inicio .item a:last-child:hover {
+                color: #007bff; /* Color al pasar el ratón */
+                text-decoration: underline;
+            }
+
+            /* Ajustes responsivos */
+            @media (max-width: 767px) {
+                .iconos_frases_inicio {
+                    gap: 15px; /* Reducir gap en móviles */
+                }
+                .iconos_frases_inicio .item {
+                    width: 90px; /* Ancho de item en móvil */
+                }
+                .iconos_frases_inicio .item a:first-child {
+                    width: 50px; /* Círculo más pequeño en móvil */
+                    height: 50px;
+                }
+                .iconos_frases_inicio .item a:first-child span {
+                    font-size: 28px; /* Emoji más pequeño en móvil */
+                }
+                .iconos_frases_inicio .item a:last-child {
+                    font-size: 13px;
+                }
+            }
 
         </style>
     </head>

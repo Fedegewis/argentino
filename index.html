@@ -717,19 +717,28 @@
                 const FALLBACK_URL = 'https://fedegewis.github.io/argentino/';
 
 
-                document.getElementById('form-buscar').addEventListener('submit', function(e) {
+                
+            document.getElementById('form-buscar').addEventListener('submit', function(e) {
                     e.preventDefault();
                     let busqueda = document.getElementById('buscar_tope').value.trim();
 
-                    if (busqueda) {
-                        // Normalizar la búsqueda del usuario: minúsculas, sin espacios extra y reemplazando espacios por '+'
-                        const busquedaNormalizada = busqueda.toLowerCase().trim().replace(/\s+/g, '+');
+                    if (busqueda.length > 2) { // Agregamos una longitud mínima para evitar búsquedas de 1 o 2 letras
+                        // 1. Normalizar la búsqueda del usuario (minúsculas, sin espacios extra)
+                        const busquedaNormalizada = busqueda.toLowerCase().trim();
 
-                        // Buscar la PRIMERA categoría que contenga la palabra de búsqueda normalizada.
+                        // 2. Crear una Expresión Regular para buscar la palabra completa
+                        // Usamos \b (boundary) para delimitar la palabra completa y 'i' para que sea insensible a mayúsculas/minúsculas.
+                        // Si el usuario busca 'aceites', buscamos la palabra entera 'aceites', no solo las letras 'c', 'e', etc.
+                        // Reemplazamos los espacios por '|' (OR) para buscar múltiples palabras (opcional) o simplemente la búsqueda.
+                        const patronBusqueda = new RegExp('\\b' + busquedaNormalizada.replace(/\s+/g, '\\b|\\b') + '\\b', 'i');
+
+                        // 3. Buscar la PRIMERA categoría que coincida con la palabra completa.
                         const categoriaEncontrada = paginas.find(slug => {
-                            // El slug ya está en minúsculas y con '+', se compara si incluye la búsqueda normalizada.
-                            // Ejemplo: Si busquedaNormalizada es 'aceites', coincidirá con el slug 'aceites+vegetales'.
-                            return slug.includes(busquedaNormalizada);
+                            // Para que la búsqueda sea precisa, debemos reemplazar los '+' del slug por un espacio para simular palabras separadas.
+                            const nombreCategoria = slug.replace(/\+/g, ' '); 
+                            
+                            // Probamos si el nombre de la categoría contiene la palabra completa buscada
+                            return patronBusqueda.test(nombreCategoria);
                         });
 
                         if (categoriaEncontrada) {
@@ -740,6 +749,9 @@
                             // Si no se encuentra ninguna coincidencia, se redirige al inicio (fallback).
                             window.location.href = FALLBACK_URL;
                         }
+                    } else {
+                        // Si la búsqueda es muy corta o vacía, redirigimos al fallback.
+                        window.location.href = FALLBACK_URL;
                     }
                 });
             </script>

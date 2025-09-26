@@ -718,39 +718,38 @@
 
 
                 
-            document.getElementById('form-buscar').addEventListener('submit', function(e) {
+                        document.getElementById('form-buscar').addEventListener('submit', function(e) {
                     e.preventDefault();
                     let busqueda = document.getElementById('buscar_tope').value.trim();
 
-                    if (busqueda.length > 2) { // Agregamos una longitud mínima para evitar búsquedas de 1 o 2 letras
-                        // 1. Normalizar la búsqueda del usuario (minúsculas, sin espacios extra)
+                    if (busqueda.length >= 3) { // ✅ Ahora buscamos solo si hay 3 o más caracteres.
+                        
+                        // 1. Normalizar la búsqueda del usuario (minúsculas, sin espacios extras)
                         const busquedaNormalizada = busqueda.toLowerCase().trim();
 
-                        // 2. Crear una Expresión Regular para buscar la palabra completa
-                        // Usamos \b (boundary) para delimitar la palabra completa y 'i' para que sea insensible a mayúsculas/minúsculas.
-                        // Si el usuario busca 'aceites', buscamos la palabra entera 'aceites', no solo las letras 'c', 'e', etc.
-                        // Reemplazamos los espacios por '|' (OR) para buscar múltiples palabras (opcional) o simplemente la búsqueda.
-                        const patronBusqueda = new RegExp('\\b' + busquedaNormalizada.replace(/\s+/g, '\\b|\\b') + '\\b', 'i');
+                        // 2. Crear una Expresión Regular para buscar COMIENZOS de palabras.
+                        // Esto permite que 'cir' coincida con 'circos'.
+                        // El patrón busca la palabra normalizada:
+                        // - al inicio del slug, O
+                        // - justo después de un '+' (que representa un espacio entre palabras).
+                        const patronBusqueda = new RegExp('(^|\\+)' + busquedaNormalizada, 'i');
 
-                        // 3. Buscar la PRIMERA categoría que coincida con la palabra completa.
+                        // 3. Buscar la PRIMERA categoría que coincida.
                         const categoriaEncontrada = paginas.find(slug => {
-                            // Para que la búsqueda sea precisa, debemos reemplazar los '+' del slug por un espacio para simular palabras separadas.
-                            const nombreCategoria = slug.replace(/\+/g, ' '); 
-                            
-                            // Probamos si el nombre de la categoría contiene la palabra completa buscada
-                            return patronBusqueda.test(nombreCategoria);
+                            // Probamos si el slug de la categoría contiene la búsqueda como prefijo.
+                            return patronBusqueda.test(slug);
                         });
 
                         if (categoriaEncontrada) {
-                            // Si se encuentra una coincidencia, se construye la URL con el slug encontrado.
+                            // Si se encuentra una coincidencia, se redirige.
                             const url = BASE_URL_CATEGORIAS + categoriaEncontrada;
                             window.location.href = url;
                         } else {
-                            // Si no se encuentra ninguna coincidencia, se redirige al inicio (fallback).
+                            // Si no hay coincidencia, se redirige al inicio.
                             window.location.href = FALLBACK_URL;
                         }
                     } else {
-                        // Si la búsqueda es muy corta o vacía, redirigimos al fallback.
+                        // Si la búsqueda es muy corta o vacía, se redirige al fallback.
                         window.location.href = FALLBACK_URL;
                     }
                 });

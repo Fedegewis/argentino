@@ -1114,40 +1114,55 @@
 
 
                 
-                        document.getElementById('form-buscar').addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    let busqueda = document.getElementById('buscar_tope').value.trim();
+                           document.getElementById('form-buscar').addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        let busqueda = document.getElementById('buscar_tope').value.trim();
 
-                    if (busqueda.length >= 3) { // ✅ Ahora buscamos solo si hay 3 o más caracteres.
-                        
-                        // 1. Normalizar la búsqueda del usuario (minúsculas, sin espacios extras)
-                        const busquedaNormalizada = busqueda.toLowerCase().trim();
+                        if (busqueda) {
+                            
+                            // 1. Normalizar la búsqueda del usuario:
+                            //   - Minúsculas.
+                            //   - Reemplazar espacios por '+' para que coincida directamente con los slugs.
+                            const busquedaNormalizada = busqueda.toLowerCase().replace(/\s+/g, '+');
 
-                        // 2. Crear una Expresión Regular para buscar COMIENZOS de palabras.
-                        // Esto permite que 'cir' coincida con 'circos'.
-                        // El patrón busca la palabra normalizada:
-                        // - al inicio del slug, O
-                        // - justo después de un '+' (que representa un espacio entre palabras).
-                        const patronBusqueda = new RegExp('(^|\\+)' + busquedaNormalizada, 'i');
+                            // 2. Definir una longitud mínima para evitar búsquedas de 1 o 2 letras.
+                            // Si la búsqueda es muy corta, la forzamos a ser exacta o buscamos prefijos largos.
+                            const MIN_LENGTH = 3;
+                            
+                            let categoriaEncontrada = null;
+                            
+                            // Búsqueda Prioritaria (si el término es largo, buscamos coincidencia parcial)
+                            if (busquedaNormalizada.length >= MIN_LENGTH) {
+                                // Buscamos la PRIMERA categoría que INCLUYE el término. 
+                                // Esto permite: "aceites vegetales" -> "aceites+vegetales"
+                                // Y también: "cir" -> "circos"
+                                categoriaEncontrada = paginas.find(slug => {
+                                    return slug.includes(busquedaNormalizada);
+                                });
+                            }
 
-                        // 3. Buscar la PRIMERA categoría que coincida.
-                        const categoriaEncontrada = paginas.find(slug => {
-                            // Probamos si el slug de la categoría contiene la búsqueda como prefijo.
-                            return patronBusqueda.test(slug);
-                        });
+                            // Búsqueda Secundaria (si la búsqueda corta falló o era muy corta, buscamos coincidencia exacta)
+                            // Si el usuario puso una palabra corta (e.g., "azucar") o si la búsqueda parcial falló, 
+                            // comprobamos si coincide exactamente con algún slug.
+                            if (!categoriaEncontrada && busquedaNormalizada.length > 0) {
+                                categoriaEncontrada = paginas.find(slug => {
+                                    // Esta comprobación sirve para slugs cortos como "azucar" o "autos"
+                                    return slug === busquedaNormalizada;
+                                });
+                            }
 
-                        if (categoriaEncontrada) {
-                            // Si se encuentra una coincidencia, se redirige.
-                            const url = BASE_URL_CATEGORIAS + categoriaEncontrada;
-                            window.location.href = url;
+                            // 3. Redirección
+                            if (categoriaEncontrada) {
+                                const url = BASE_URL_CATEGORIAS + categoriaEncontrada;
+                                window.location.href = url;
+                            } else {
+                                // Si no hay ninguna coincidencia, se redirige al inicio.
+                                window.location.href = FALLBACK_URL;
+                            }
                         } else {
-                            // Si no hay coincidencia, se redirige al inicio.
+                            // Si la búsqueda está vacía, se redirige al fallback.
                             window.location.href = FALLBACK_URL;
                         }
-                    } else {
-                        // Si la búsqueda es muy corta o vacía, se redirige al fallback.
-                        window.location.href = FALLBACK_URL;
-                    }
                 });
             </script>                
         <script>

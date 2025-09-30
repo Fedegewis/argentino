@@ -661,6 +661,69 @@
                     font-size: 13px;
                 }
             }
+            .banner {
+                position: relative;
+                background: url('../imagenes/banner-mexico.jpg') center/cover no-repeat;
+                color: #fff;
+                padding: 80px 20px;
+                margin: 40px 0;
+                text-align: center;
+                border-radius: 8px; /* opcional */
+                overflow: hidden;
+                }
+
+                .banner::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: rgba(0,0,0,0.4); /* capa oscura para contraste */
+                }
+
+                .banner-content {
+                position: relative;
+                z-index: 1;
+                max-width: 800px;
+                margin: auto;
+                }
+
+                .banner h2 {
+                font-size: 36px;
+                margin-bottom: 10px;
+                }
+
+                .banner p {
+                font-size: 18px;
+                margin-bottom: 20px;
+                }
+
+                .banner-btn {
+                display: inline-block;
+                background: #ff645c;
+                color: #fff;
+                padding: 12px 24px;
+                border-radius: 25px;
+                font-weight: bold;
+                text-decoration: none;
+                transition: background 0.3s;
+                }
+
+                .banner-btn:hover {
+                background: #e03e36;
+                }
+
+                /* Responsive */
+                @media (max-width: 767px) {
+                .banner {
+                    padding: 60px 15px;
+                }
+                .banner h2 {
+                    font-size: 26px;
+                }
+                .banner p {
+                    font-size: 16px;
+                }
+                }
+
 
         </style>
     </head>
@@ -788,6 +851,13 @@
                 })
             }();
         </script>
+        <div class="banner">
+            <div class="banner-content">
+                <h2>Descubrí lo mejor de México</h2>
+                <p>Guías, negocios y lugares destacados cerca de vos</p>
+                <a href="/argentino/mexico/" class="banner-btn">Explorar ahora</a>
+            </div>
+        </div>
         <div id="contenido2">
             <div class="iconos_frases_inicio">
                 <div class="item">
@@ -864,6 +934,13 @@
             </div>
         </div>
         </div>
+        <div class="banner">
+            <div class="banner-content">
+                <h2>¿Listo para explorar más?</h2>
+                <p>Encontrá negocios y lugares en toda Argentina y México</p>
+                <a href="/argentino/" class="banner-btn">Ir al inicio</a>
+            </div>
+            </div>
         <div id="pie" class="visible_ready">
             <p>
                 <a href="about-us" rel="nofollow">Acerca de</a>

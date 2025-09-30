@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Formulario - Formulario</title>
+  <title>Formulario</title>
   <style>
     body { font-family: Arial, sans-serif; background:#fafafa; margin:0; padding:20px; }
     h1 { color:#333; }
@@ -11,14 +11,25 @@
     input, textarea, select { width:100%; padding:10px; margin-top:5px; border:1px solid #ccc; border-radius:6px; font-size:14px; }
     button { margin-top:20px; padding:10px 15px; background:#2160ff; color:#fff; border:0; border-radius:6px; cursor:pointer; font-size:16px; }
     button:hover { background:#1749c7; }
+    #mensajeEnviado { 
+      display:none; 
+      text-align:center; 
+      padding:20px; 
+      margin-top:20px; 
+      background:#e0ffe0; 
+      border:1px solid #b2d8b2; 
+      border-radius:8px;
+      color:#2b662b;
+      font-weight:bold;
+    }
   </style>
 </head>
 <body>
 
-  <h1>Formulario de Formulario</h1>
-  <p>Completá el formulario y te responderemos por correo electrónico.</p>
+  <h1>Formulario de Contacto</h1>
+  <p>Completá el formulario y te responderemos.</p>
 
-  <form action="mailto:tu-email@ejemplo.com" method="post" enctype="text/plain">
+  <form id="miFormulario">
     <label for="nombre">Nombre *</label>
     <input type="text" id="nombre" name="nombre" required>
 
@@ -38,6 +49,19 @@
 
     <button type="submit">Enviar</button>
   </form>
+
+  <div id="mensajeEnviado">✅ Formulario enviado con éxito. Serás redirigido al inicio...</div>
+
+  <script>
+    document.getElementById("miFormulario").addEventListener("submit", function(e) {
+      e.preventDefault(); // Evita el envío real
+      document.getElementById("miFormulario").style.display = "none"; // Oculta el formulario
+      document.getElementById("mensajeEnviado").style.display = "block"; // Muestra mensaje
+      setTimeout(function(){
+        window.location.href = "/argentino/"; // Redirige al home
+      }, 2500); // espera 2,5 segundos
+    });
+  </script>
 
 </body>
 </html>

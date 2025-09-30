@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Preguntas Frecuentes - Formulario</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#fafafa; margin:0; padding:20px; }
+    h1 { color:#333; }
+    form { background:#fff; padding:20px; border-radius:8px; max-width:500px; margin:auto; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+    label { display:block; margin-top:15px; font-weight:bold; }
+    input, textarea, select { width:100%; padding:10px; margin-top:5px; border:1px solid #ccc; border-radius:6px; font-size:14px; }
+    button { margin-top:20px; padding:10px 15px; background:#2160ff; color:#fff; border:0; border-radius:6px; cursor:pointer; font-size:16px; }
+    button:hover { background:#1749c7; }
+  </style>
+</head>
+<body>
+
+  <h1>Formulario de Preguntas Frecuentes</h1>
+  <p>Completá el formulario y te responderemos por correo electrónico.</p>
+
+  <form action="mailto:tu-email@ejemplo.com" method="post" enctype="text/plain">
+    <label for="nombre">Nombre *</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="email">Email *</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="tema">Tema</label>
+    <select id="tema" name="tema">
+      <option>Consulta general</option>
+      <option>Actualizar datos de negocio</option>
+      <option>Reportar error</option>
+      <option>Eliminar mis datos</option>
+    </select>
+
+    <label for="mensaje">Mensaje *</label>
+    <textarea id="mensaje" name="mensaje" required></textarea>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+</body>
+</html>

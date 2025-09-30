@@ -338,29 +338,91 @@
                 </div>
             </div>
         </div>
-                <script>
-                document.getElementById('form-buscar').addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    let busqueda = document.getElementById('buscar_tope').value.trim();
-                    if(busqueda) {
-                        busqueda = busqueda.replace(/\s+/g, '+'); // espacios por +
-                        const url = 'https://fedegewis.github.io/argentino/mexico/' + busqueda;
+                <br>
+    <br>
 
-                        // Verificar si la página existe
-                        fetch(url, { method: 'HEAD' })
-                            .then(response => {
-                                if(response.ok) {
-                                    window.location.href = url; // si existe, ir a la página
-                                } else {
-                                    window.location.href = 'https://fedegewis.github.io/argentino/'; // si no, al inicio
-                                }
-                            })
-                            .catch(() => {
-                                window.location.href = 'https://fedegewis.github.io/argentino/'; // si hay error, al inicio
-                            });
-                    }
-                });
-                </script>                               
+    <script>
+        // --------------------------------------------------------------------------------
+        // 1. DEFINICIÓN DE CATEGORÍAS (LISTA DE SLUGS)
+        // --------------------------------------------------------------------------------
+        const paginas = [
+            "aberturas","abogados","accesorios+para+baño","aceites+vegetales","adiestramiento+de+perros",
+            "adopcion+de+mascotas","agencias+de+modelaje","agencias+de+publicidad","aislantes","albaniles",
+            "alfombras","alimentos+congelados","alimentos+dieteticos","alimentos+en+conserva",
+            "alimentos+para+mascotas","alimentos+veganos","ambulancias","andamios","anticuarios","arquitectos",
+            "artes+marciales","articulos+de+electricidad","articulos+de+limpieza","articulos+de+peluqueria",
+            "articulos+deportivos","atletismo","autos","autobuses","autoescuelas","autos+chocados","azucar",
+            "ballet","balonmano","banos+portatiles","banos+quimicos","barberias","basquet","bazares",
+            "bebidas+alcoholicas","bebidas+sin+alcohol","bibliotecas","bicicleterias","billares","bowling",
+            "calefaccion+y+ventilacion","camiones","camionetas","carnavales","carnes","carpinteros+de+obra",
+            "carros+de+golf","casas+rodantes","caza+y+pesca","centros+educativos","cereales","chocolate",
+            "ciclismo","cines","circos","clases+de+idiomas","clubes+deportivos","colchoneria","colegios",
+            "comics","concesionarios","conciertos","conejo+mascota","contadores","corseterias",
+            "cortinas+y+persianas","cristalerias","cursos","desfiles+de+modas","discotecas",
+            "disenadores+graficos","droguerias","educacion+artistica","educacion+especial",
+            "educacion+primaria","educacion+privada","educacion+religiosa","educacion+secundaria",
+            "electricistas","electrodomesticos","escribanos","escuelas","estetica+corporal","eventos",
+            "florerias","gatos+mascota","higiene+personal","iluminacion","imprentas",
+            "instrumentos+musicales","jardineria","joyerias","jugueterias","librerias","maquillajes",
+            "marroquinerias","muebles","pajarerias","paseadores+de+perros","peceras","peces","peluquerias",
+            "peluquerias+de+mascotas","piercings","tatuajes","unas","venta+de+inmuebles","veterinarias"
+        ];
+
+        const BASE_URL_CATEGORIAS = 'https://fedegewis.github.io/argentino/mexico/';
+        const FALLBACK_URL = 'https://fedegewis.github.io/argentino/';
+
+
+        document.getElementById('form-buscar').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let busqueda = document.getElementById('buscar_tope').value.trim();
+
+            if (busqueda) {
+                
+                // 1. Normalizar la búsqueda del usuario:
+                //   - Minúsculas.
+                //   - Reemplazar espacios por '+' para que coincida directamente con los slugs.
+                const busquedaNormalizada = busqueda.toLowerCase().replace(/\s+/g, '+');
+
+                // 2. Definir una longitud mínima para evitar búsquedas de 1 o 2 letras.
+                // Si la búsqueda es muy corta, la forzamos a ser exacta o buscamos prefijos largos.
+                const MIN_LENGTH = 3;
+                
+                let categoriaEncontrada = null;
+                
+                // Búsqueda Prioritaria (si el término es largo, buscamos coincidencia parcial)
+                if (busquedaNormalizada.length >= MIN_LENGTH) {
+                    // Buscamos la PRIMERA categoría que INCLUYE el término. 
+                    // Esto permite: "aceites vegetales" -> "aceites+vegetales"
+                    // Y también: "cir" -> "circos"
+                    categoriaEncontrada = paginas.find(slug => {
+                        return slug.includes(busquedaNormalizada);
+                    });
+                }
+
+                // Búsqueda Secundaria (si la búsqueda corta falló o era muy corta, buscamos coincidencia exacta)
+                // Si el usuario puso una palabra corta (e.g., "azucar") o si la búsqueda parcial falló, 
+                // comprobamos si coincide exactamente con algún slug.
+                if (!categoriaEncontrada && busquedaNormalizada.length > 0) {
+                    categoriaEncontrada = paginas.find(slug => {
+                        // Esta comprobación sirve para slugs cortos como "azucar" o "autos"
+                        return slug === busquedaNormalizada;
+                    });
+                }
+
+                // 3. Redirección
+                if (categoriaEncontrada) {
+                    const url = BASE_URL_CATEGORIAS + categoriaEncontrada;
+                    window.location.href = url;
+                } else {
+                    // Si no hay ninguna coincidencia, se redirige al inicio.
+                    window.location.href = FALLBACK_URL;
+                }
+            } else {
+                // Si la búsqueda está vacía, se redirige al fallback.
+                window.location.href = FALLBACK_URL;
+            }
+        });
+    </script>                             
 	
         <script>
             !function() {

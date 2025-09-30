@@ -320,6 +320,80 @@
                     width: 50%
                 }
             }
+
+             /* Estilos para los iconos de categoría */
+            .iconos_frases_inicio {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center; /* Centrar los ítems */
+                gap: 20px; /* Espacio entre los ítems */
+                padding: 20px 0;
+                max-width: 900px; /* Asegura que el contenedor no sea demasiado ancho */
+                margin: 0 auto 40px auto; /* Centra el div y añade margen inferior */
+            }
+
+            .iconos_frases_inicio .item {
+                display: flex;
+                flex-direction: column; /* Icono arriba, texto abajo */
+                align-items: center; /* Centra el contenido */
+                text-align: center;
+                width: 100px; /* Ancho fijo para cada ítem, como estaba en la imagen original */
+            }
+
+            /* Estilos para el círculo de color (el primer 'a' dentro de 'item') */
+            .iconos_frases_inicio .item a:first-child {
+                display: flex; /* Añadido: Para centrar el contenido (emoji) */
+                justify-content: center; /* Añadido: Centrar horizontalmente el emoji */
+                align-items: center; /* Añadido: Centrar verticalmente el emoji */
+                width: 64px; /* Tamaño del círculo, como en tus SVG originales */
+                height: 64px; /* Tamaño del círculo, como en tus SVG originales */
+                border-radius: 50%; /* Para que sea un círculo */
+                margin-bottom: 8px; /* Espacio entre el círculo y el texto */
+                text-decoration: none; /* Quitar subrayado del enlace */
+                /* Los background-color se aplican en línea en el HTML */
+            }
+
+            /* Estilos específicos para el span que contiene el emoji */
+            .iconos_frases_inicio .item a:first-child span {
+                font-size: 36px; /* Ajustado: Tamaño del emoji para que se vea bien en 64x64px */
+                line-height: 1; /* Añadido: Elimina espacio extra de línea para mejor centrado */
+                color: #333333; /* El color de los emojis suele ser inherente, pero algunos se pueden cambiar */
+            }
+
+
+            /* Estilos para el texto de la categoría (el segundo 'a' dentro de 'item') */
+            .iconos_frases_inicio .item a:last-child {
+                font-size: 14px; /* Tamaño del texto de la categoría, como antes */
+                color: #333333; /* Color de texto, como antes */
+                text-decoration: none;
+                line-height: 1.2;
+                max-width: 90px;
+            }
+
+            .iconos_frases_inicio .item a:last-child:hover {
+                color: #007bff; /* Color al pasar el ratón */
+                text-decoration: underline;
+            }
+
+            /* Ajustes responsivos */
+            @media (max-width: 767px) {
+                .iconos_frases_inicio {
+                    gap: 15px;
+                }
+                .iconos_frases_inicio .item {
+                    width: 90px;
+                }
+                .iconos_frases_inicio .item a:first-child {
+                    width: 54px; /* Círculo ligeramente más pequeño en móvil */
+                    height: 54px;
+                }
+                .iconos_frases_inicio .item a:first-child span {
+                    font-size: 30px; /* Emoji más pequeño en móvil */
+                }
+                .iconos_frases_inicio .item a:last-child {
+                    font-size: 13px;
+                }
+            }
         </style>
     </head>
     <body class="argentino">

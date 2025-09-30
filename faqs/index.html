@@ -1,0 +1,121 @@
+<!-- /argentino/faqs/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Preguntas frecuentes – Argentino</title>
+  <style>
+    :root { --bg:#fafafa; --fg:#222; --muted:#666; --card:#fff; --border:#e5e5e5; --brand:#2160ff;}
+    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6}
+    header{background:#111;color:#fff;padding:18px 16px}
+    header .wrap, main .wrap, footer .wrap{max-width:980px;margin:auto;padding:0 10px}
+    nav a{color:#fff;text-decoration:none;margin-right:14px}
+    h1,h2{margin:16px 0}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;margin:16px 0}
+    details{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px;margin:10px 0}
+    summary{cursor:pointer;font-weight:600}
+    form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    form .row .full{grid-column:1/-1}
+    label{font-size:.92rem;color:var(--muted);display:block;margin-bottom:6px}
+    input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font:inherit;background:#fff}
+    textarea{min-height:120px;resize:vertical}
+    .hint{font-size:.85rem;color:var(--muted)}
+    .actions{display:flex;gap:10px;align-items:center;margin-top:10px}
+    button{border:0;border-radius:10px;padding:10px 16px;font-weight:600;cursor:pointer}
+    .primary{background:var(--brand);color:#fff}
+    .ghost{background:#0000;border:1px solid var(--border)}
+    .ok{display:none;margin-top:10px;padding:10px;border-radius:8px;background:#e9f7ef;color:#0b5137;border:1px solid #badbcc}
+    .err{display:none;margin-top:10px;padding:10px;border-radius:8px;background:#fdecea;color:#611a15;border:1px solid #f5c2c7}
+    footer{border-top:1px solid var(--border);color:var(--muted);padding:18px 0;margin-top:30px}
+    @media (max-width:720px){ form .row{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <strong>Argentino</strong>
+    <nav style="float:right">
+      <a href="/argentino/">Inicio</a>
+      <a href="/argentino/about-us.html">Sobre nosotros</a>
+      <a href="/argentino/faqs/">Preguntas frecuentes</a>
+    </nav>
+    <div style="clear:both"></div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <h1>Preguntas frecuentes</h1>
+    <p class="card">
+      Bienvenido a nuestras FAQs. Abajo vas a encontrar respuestas rápidas a las consultas más comunes.
+      Si no encontrás lo que buscás, completá el formulario y te respondemos por email.
+    </p>
+
+    <section aria-label="Listado de preguntas">
+      <h2>General</h2>
+
+      <details open>
+        <summary>¿Qué es Argentino y cómo funciona?</summary>
+        <p>Es un directorio y buscador de categorías y negocios. Navegás por secciones o buscás directamente;
+        cada ficha tiene datos de contacto y enlaces. Estamos optimizados para móviles y escritorio.</p>
+      </details>
+
+      <details>
+        <summary>¿Cómo actualizo la información de mi negocio?</summary>
+        <p>Usá el formulario de esta página eligiendo el tipo de consulta “Actualizar datos de negocio”.
+        Te pediremos el enlace a tu ficha y los cambios a realizar.</p>
+      </details>
+
+      <details>
+        <summary>¿Tiene costo figurar en el sitio?</summary>
+        <p>La inclusión básica es gratuita. Ofrecemos opciones destacadas con mayor visibilidad.</p>
+      </details>
+
+      <details>
+        <summary>¿Cómo reporto un error o enlace caído?</summary>
+        <p>Desde el formulario, seleccioná “Reportar error” y pegá la URL exacta. Lo revisamos a la brevedad.</p>
+      </details>
+
+      <h2>Cuenta y Privacidad</h2>
+
+      <details>
+        <summary>¿Qué datos personales guardan?</summary>
+        <p>Solo los necesarios para atender tu consulta (nombre y email). No vendemos ni compartimos tus datos
+        con terceros. Ver también <a href="/argentino/terms/">Condiciones de uso</a>.</p>
+      </details>
+
+      <details>
+        <summary>¿Puedo solicitar la eliminación de mis datos?</summary>
+        <p>Sí, escribinos desde el formulario eligiendo “Eliminar mis datos” y procesamos la baja.</p>
+      </details>
+    </section>
+
+    <section class="card" aria-label="Formulario de contacto">
+      <h2>¿No encontraste tu respuesta? Escribinos</h2>
+      <p class="hint">Campos marcados con * son obligatorios.</p>
+
+      <form id="faqForm" novalidate>
+        <div class="row">
+          <div>
+            <label for="name">Nombre y apellido *</label>
+            <input id="name" name="name" autocomplete="name" required />
+          </div>
+          <div>
+            <label for="email">Email *</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+
+          <div class="full">
+            <label for="topic">Tipo de consulta *</label>
+            <select id="topic" name="topic" required>
+              <option value="">Elegí una opción</option>
+              <option>Consulta general</option>
+              <option>Actualizar datos de negocio</option>
+              <option>Reportar error</option>
+              <option>Eliminar mis datos</option>
+              <option>Otras</option>
+            </select>
+          </div>
+
+          <div class="full">

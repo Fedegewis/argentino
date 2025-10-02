@@ -662,67 +662,60 @@
                 }
             }
             .banner {
-                position: relative;
-                background: url('../imagenes/banner-mexico.jpg') center/cover no-repeat;
-                color: #fff;
-                padding: 80px 20px;
-                margin: 40px 0;
+                background-image: url('imagenes/Imagen_fondo_footer.jpg'); /* Cambiá por la imagen que quieras */
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                padding: 100px 20px;
                 text-align: center;
-                border-radius: 8px; /* opcional */
-                overflow: hidden;
-                }
+                position: relative;
+            }
 
-                .banner::after {
-                content: '';
+            .banner::before {
+                content: "";
                 position: absolute;
-                inset: 0;
-                background: rgba(0,0,0,0.4); /* capa oscura para contraste */
-                }
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(0,0,0,0.5); /* capa oscura para resaltar el texto */
+                z-index: 0;
+            }
 
-                .banner-content {
+            .banner-content {
                 position: relative;
                 z-index: 1;
-                max-width: 800px;
-                margin: auto;
-                }
-
-                .banner h2 {
-                font-size: 36px;
-                margin-bottom: 10px;
-                }
-
-                .banner p {
-                font-size: 18px;
-                margin-bottom: 20px;
-                }
-
-                .banner-btn {
-                display: inline-block;
-                background: #ff645c;
                 color: #fff;
-                padding: 12px 24px;
-                border-radius: 25px;
-                font-weight: bold;
+            }
+
+            .banner h2 {
+                font-size: 3.5rem;   /* grande como el header */
+                font-weight: 800;
+                color: #ffcc00;      /* amarillo vistoso */
+                text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+                margin-bottom: 20px;
+            }
+
+            .banner p {
+                font-size: 1.5rem;
+                color: #ffffff;
+                text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+                margin-bottom: 20px;
+            }
+
+            .banner-btn {
+                display: inline-block;
+                background: #00bfff; /* celeste bandera */
+                color: white;
+                font-size: 1.2rem;
+                font-weight: 600;
+                padding: 12px 25px;
+                border-radius: 8px;
                 text-decoration: none;
                 transition: background 0.3s;
-                }
+            }
 
-                .banner-btn:hover {
-                background: #e03e36;
-                }
+            .banner-btn:hover {
+                background: #0099cc; /* un celeste más oscuro al pasar el mouse */
+            }
 
-                /* Responsive */
-                @media (max-width: 767px) {
-                .banner {
-                    padding: 60px 15px;
-                }
-                .banner h2 {
-                    font-size: 26px;
-                }
-                .banner p {
-                    font-size: 16px;
-                }
-                }
 
             .hero {
                     background-image: url('imagenes/Imagen_fondo_header.jpg'); /* poné la ruta real */
@@ -882,7 +875,7 @@
             }();
         </script>
             <div class="hero">
-                <h1>Bienvenido a Argentino</h1>
+                <h1>Bienvenido a CAMBIAR NOMBRE</h1>
                 <p>Encontrá lo que buscás en todo el país</p>
             </div>
         <div id="contenido2">
@@ -967,7 +960,8 @@
                 <p>Encontrá negocios y lugares en toda Argentina</p>
                 <a href="/argentino/" class="banner-btn">Ir al inicio</a>
             </div>
-            </div>
+        </div>
+
         <div id="pie" class="visible_ready">
             <p>
                 <a href="about-us" rel="nofollow">Acerca de</a>

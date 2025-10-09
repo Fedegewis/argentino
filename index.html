@@ -291,12 +291,16 @@
                 }
 
                 .tope2_logo {
-                    width: 100%
-                }
+  width: auto; /* no ocupa todo el ancho */
+}
 
-                .tope2_logo img {
-                    height: 33px
-                }
+.tope2_logo img {
+  height: auto;
+  width: 200px; /* o 180px si querés más discreto */
+  max-width: 100%; /* para que no se deforme en pantallas chicas */
+  vertical-align: middle;
+}
+
 
                 #tope3_buscar {
                     position: absolute;

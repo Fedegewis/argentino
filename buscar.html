@@ -12,7 +12,7 @@
                     let busqueda = document.getElementById('buscar_tope').value.trim();
                     if(busqueda) {
                         busqueda = busqueda.replace(/\s+/g, '+'); // espacios por +
-                        const url = 'https://fedegewis.github.io/argentino/mexico/' + busqueda;
+                        const url = 'https://fedegewis.github.io/mexico/' + busqueda;
 
                         // Verificar si la página existe
                         fetch(url, { method: 'HEAD' })
@@ -20,11 +20,11 @@
                                 if(response.ok) {
                                     window.location.href = url; // si existe, ir a la página
                                 } else {
-                                    window.location.href = 'https://fedegewis.github.io/argentino/'; // si no, al inicio
+                                    window.location.href = 'https://fedegewis.github.io/'; // si no, al inicio
                                 }
                             })
                             .catch(() => {
-                                window.location.href = 'https://fedegewis.github.io/argentino/'; // si hay error, al inicio
+                                window.location.href = 'https://fedegewis.github.io/'; // si hay error, al inicio
                             });
                     }
                 });
@@ -72,9 +72,9 @@
     ];
 
     // URL base de tu sitio para construir la URL de la categoría
-    const BASE_URL_CATEGORIAS = 'https://fedegewis.github.io/argentino/mexico/';
+    const BASE_URL_CATEGORIAS = 'https://fedegewis.github.io/mexico/';
     // URL de fallback (página de inicio o error)
-    const FALLBACK_URL = 'https://fedegewis.github.io/argentino/';
+    const FALLBACK_URL = 'https://fedegewis.github.io/';
 
 
     document.getElementById('form-buscar').addEventListener('submit', function(e) {

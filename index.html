@@ -166,32 +166,37 @@
                 border-bottom: 1px solid #d4d4d4
             }
 
-           .tope2_contenedor {
+            .tope2_contenedor {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* separa logo y buscador */
+            justify-content: space-between;
             max-width: 999px;
-            height: 60px; /* subimos un poco para que el logo entre cómodo */
+            height: 80px; /* subimos bastante para dar aire */
             margin: 0 auto;
-            gap: 15px; /* espacio entre logo y buscador */
+            gap: 20px;
             }
 
             .tope2_logo {
-            width: auto; /* evita que el logo se estire */
+            width: auto;
             }
 
             .tope2_logo img {
-            height: 55px; /* más grande, visible y proporcionado */
+            height: 70px; /* más grande y visible */
             width: auto;
             padding-left: 10px;
             vertical-align: middle;
             }
 
             @media (max-width: 767px) {
+            .tope2_contenedor {
+                height: 60px;
+            }
+
             .tope2_logo img {
-                height: 40px; /* versión más chica para móviles */
+                height: 45px; /* más chico en móvil */
             }
             }
+
 
 
             #tope3_buscar {

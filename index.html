@@ -166,19 +166,33 @@
                 border-bottom: 1px solid #d4d4d4
             }
 
-            .tope2_contenedor {
-                display: flex;
-                align-items: center;
-                max-width: 999px;
-                height: 50px;
-                margin: 0 auto
+           .tope2_contenedor {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* separa logo y buscador */
+            max-width: 999px;
+            height: 60px; /* subimos un poco para que el logo entre cómodo */
+            margin: 0 auto;
+            gap: 15px; /* espacio entre logo y buscador */
+            }
+
+            .tope2_logo {
+            width: auto; /* evita que el logo se estire */
             }
 
             .tope2_logo img {
-                height: 40px;
-                width: auto;
-                padding-left: 10px
+            height: 55px; /* más grande, visible y proporcionado */
+            width: auto;
+            padding-left: 10px;
+            vertical-align: middle;
             }
+
+            @media (max-width: 767px) {
+            .tope2_logo img {
+                height: 40px; /* versión más chica para móviles */
+            }
+            }
+
 
             #tope3_buscar {
                 width: 100%
@@ -290,17 +304,7 @@
                     top: -102px
                 }
 
-                .tope2_logo {
-                width: auto; /* no ocupa todo el ancho */
-                }
-
-                .tope2_logo img {
-                height: auto;
-                width: 200px; /* o 180px si querés más discreto */
-                max-width: 100%; /* para que no se deforme en pantallas chicas */
-                vertical-align: middle;
-                }
-
+                
 
                 #tope3_buscar {
                     position: absolute;

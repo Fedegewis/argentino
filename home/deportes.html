@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+    <head>
+        <meta charset="UTF-8">
+        <title>Deportes</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="../css/estilos.css">
+        <link type="text/css" rel="stylesheet" href="../css/estilos2.css">
+        <link rel="icon" type="image/png" href="../logo.country.png">
+
+        <style>
+            .tope2 {
+                width: 100%;
+                height: 50px;
+                border-bottom: 1px solid #d4d4d4
+            }
+
+            .tope2_contenedor {
+                display: flex;
+                align-items: center;
+                max-width: 999px;
+                height: 50px;
+                margin: 0 auto
+            }
+
+            .tope2_logo img {
+                height: 40px;
+                width: auto;
+                padding-left: 10px
+            }
+
+            #tope3_buscar {
+                width: 100%
+            }
+
+            #tope3_buscar form {
+                position: relative;
+                width: 250px;
+                margin-left: 30px;
+                font-family: roboto,arial,helvetica,sans-serif;
+                font-size: 14px
+            }
+
+            #tope3_buscar svg {
+                position: absolute;
+                top: 6px;
+                left: 8px;
+                width: 24px;
+                height: 24px;
+                fill: #666666
+            }
+
+            #buscar_tope {
+                box-sizing: border-box;
+                width: 100%;
+                font-family: roboto,arial,helvetica,sans-serif;
+                font-size: 14px;
+                height: 35px;
+                line-height: 35px;
+                padding: 5px 10px 5px 33px;
+                color: #666;
+                margin: 0;
+                vertical-align: middle;
+                background-color: #f0f0f0;
+                border: 1px solid #f0f0f0;
+                border-radius: 20px;
+                opacity: 1;
+                outline: 0;
+                transition: border .16s ease-out
+            }
+
+            #buscar_tope:focus {
+                border: 1px solid #00aeef;
+                box-shadow: 0 0 0 1px #00aeef
+            }
+
+            #buscar_tope:focus::-webkit-input-placeholder,#buscar_tope:focus::placeholder {
+                color: transparent
+            }
+
+            .tope2_micuenta {
+                margin-left: 20px;
+                font-size: 11px;
+                white-space: nowrap
+            }
+
+            .tope2_micuenta svg {
+                vertical-align: -8px;
+                width: 24px;
+                height: 24px
+            }
+
+            .tope2_publicar {
+                margin-left: 20px;
+                margin-right: 10px
+            }
+
+            .tope2_publicar .botonpublicar {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                font-family: roboto,arial,helvetica,sans-serif;
+                font-size: 14px;
+                height: 30px;
+                line-height: initial;
+                font-weight: 600;
+                margin: 0;
+                padding-left: 16px;
+                padding-right: 16px;
+                color: #fff;
+                background-color: #333;
+                border-radius: 20px;
+                border-width: 0;
+                cursor: pointer;
+                outline: 0;
+                white-space: nowrap
+            }
+
+            .tope2_publicar .botonpublicar span {
+                font-size: 21px;
+                line-height: 24px
+            }
+
+            a.botonpublicar:active,a.botonpublicar:hover,a.botonpublicar:link,a.botonpublicar:visited {
+                text-decoration: none
+            }
+
+            @media (max-width: 767.98px) {
+                .tope2 {
+                    position:fixed;
+                    top: 0;
+                    z-index: 1000;
+                    background-color: #fff;
+                    transition: all .3s ease
+                }
+
+                .tope2.hide {
+                    top: -102px
+                }
+
+                .tope2_logo {
+                    width: 100%
+                }
+
+                .tope2_logo img {
+                    height: 33px
+                }
+
+                #tope3_buscar {
+                    position: absolute;
+                    top: 50px;
+                    box-sizing: border-box;
+                    display: block;
+                    background-color: #fff;
+                    padding: 0 10px 10px 10px;
+                    border-bottom: 1px solid #d4d4d4
+                }
+
+                #tope3_buscar form {
+                    width: 100%;
+                    margin-left: 0
+                }
+
+                #tope3_buscar svg {
+                    top: 8px
+                }
+
+                .tope2_micuenta {
+                    margin-left: 5px
+                }
+
+                .tope2_micuenta .person {
+                    vertical-align: unset
+                }
+
+                .tope2_micuenta a span {
+                    display: none
+                }
+
+                .tope2_publicar {
+                    margin-left: 5px
+                }
+
+                .tope2_publicar .botonpublicar {
+                    padding-left: 12px;
+                    padding-right: 12px
+                }
+
+                #buscar_tope {
+                    font-size: 16px;
+                    height: 40px;
+                    line-height: 40px
+                }
+            }
+
+            .jumbotron-wrapper {
+                width: 100%;
+                background-color: #f0f0f0;
+                margin-bottom: 30px
+            }
+
+            .jumbotron {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 15px;
+                max-width: 800px;
+                margin: auto;
+                padding: 20px
+            }
+
+            .jumbotron h1 {
+                margin: 0 0 15px 0
+            }
+
+            .jumbotron p {
+                line-height: 22px;
+                margin: 0
+            }
+
+            .jumbotron a {
+                margin-top: 15px
+            }
+
+            .jumbotron img {
+                border-radius: 4px
+            }
+
+            @media (max-width: 767.98px) {
+                .jumbotron-wrapper {
+                    margin-top:101px
+                }
+
+                .jumbotron {
+                    flex-direction: column
+                }
+
+                .jumbotron a {
+                    box-sizing: border-box;
+                    width: 100%
+                }
+
+                .jumbotron img {
+                    width: 100%;
+                    height: unset
+                }
+            }
+
+            .iconos_frases_inicio {
+                display: flex;
+                flex-wrap: wrap;
+                margin: 10px 10px 0 10px;
+                font: 11px Roboto,Arial,Helvetica,sans-serif
+            }
+
+            .iconos_frases_inicio .item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                width: 16.66%;
+                height: 100px
+            }
+
+            .iconos_frases_inicio .item a {
+                display: block
+            }
+
+            .iconos_frases_inicio .item a:first-of-type {
+                width: 32px;
+                height: 32px;
+                padding: 10px;
+                margin-bottom: 7px;
+                border-radius: 50%
+            }
+
+            .iconos_frases_inicio .item svg {
+                width: 32px;
+                height: 32px;
+                fill: #333333
+            }
+
+            @media (max-width: 850px) {
+                .iconos_frases_inicio .item {
+                    width:25%
+                }
+            }
+
+            @media (max-width: 700px) {
+                .iconos_frases_inicio .item {
+                    width:33.33%
+                }
+            }
+
+            @media (max-width: 320px) {
+                .iconos_frases_inicio .item {
+                    width:50%
+                }
+            }
+
+            .frases_links_home ul {
+                display: flex;
+                flex-wrap: wrap;
+                margin: 0;
+                padding: 0;
+                list-style: none
+            }
+
+            .frases_links_home ul li {
+                width: 25%;
+                min-height: 36px
+            }
+
+            @media (max-width: 767.98px) {
+                .frases_links_home {
+                    margin:0 10px
+                }
+
+                .frases_links_home ul li {
+                    width: 50%
+                }
+            }
+             /* Estilos para los iconos de categoría */
+            .iconos_frases_inicio {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center; /* Centrar los ítems */
+                gap: 20px; /* Espacio entre los ítems */
+                padding: 20px 0;
+                max-width: 900px; /* Asegura que el contenedor no sea demasiado ancho */
+                margin: 0 auto 40px auto; /* Centra el div y añade margen inferior */
+            }
+
+            .iconos_frases_inicio .item {
+                display: flex;
+                flex-direction: column; /* Icono arriba, texto abajo */
+                align-items: center; /* Centra el contenido */
+                text-align: center;
+                width: 100px; /* Ancho fijo para cada ítem, como estaba en la imagen original */
+            }
+
+            /* Estilos para el círculo de color (el primer 'a' dentro de 'item') */
+            .iconos_frases_inicio .item a:first-child {
+                display: flex; /* Añadido: Para centrar el contenido (emoji) */
+                justify-content: center; /* Añadido: Centrar horizontalmente el emoji */
+                align-items: center; /* Añadido: Centrar verticalmente el emoji */
+                width: 64px; /* Tamaño del círculo, como en tus SVG originales */
+                height: 64px; /* Tamaño del círculo, como en tus SVG originales */
+                border-radius: 50%; /* Para que sea un círculo */
+                margin-bottom: 8px; /* Espacio entre el círculo y el texto */
+                text-decoration: none; /* Quitar subrayado del enlace */
+                /* Los background-color se aplican en línea en el HTML */
+            }
+
+            /* Estilos específicos para el span que contiene el emoji */
+            .iconos_frases_inicio .item a:first-child span {
+                font-size: 36px; /* Ajustado: Tamaño del emoji para que se vea bien en 64x64px */
+                line-height: 1; /* Añadido: Elimina espacio extra de línea para mejor centrado */
+                color: #333333; /* El color de los emojis suele ser inherente, pero algunos se pueden cambiar */
+            }
+
+
+            /* Estilos para el texto de la categoría (el segundo 'a' dentro de 'item') */
+            .iconos_frases_inicio .item a:last-child {
+                font-size: 14px; /* Tamaño del texto de la categoría, como antes */
+                color: #333333; /* Color de texto, como antes */
+                text-decoration: none;
+                line-height: 1.2;
+                max-width: 90px;
+            }
+
+            .iconos_frases_inicio .item a:last-child:hover {
+                color: #007bff; /* Color al pasar el ratón */
+                text-decoration: underline;
+            }
+
+            /* Ajustes responsivos */
+            @media (max-width: 767px) {
+                .iconos_frases_inicio {
+                    gap: 15px;
+                }
+                .iconos_frases_inicio .item {
+                    width: 90px;
+                }
+                .iconos_frases_inicio .item a:first-child {
+                    width: 54px; /* Círculo ligeramente más pequeño en móvil */
+                    height: 54px;
+                }
+                .iconos_frases_inicio .item a:first-child span {
+                    font-size: 30px; /* Emoji más pequeño en móvil */
+                }
+                .iconos_frases_inicio .item a:last-child {
+                    font-size: 13px;
+                }
+            }
+             .imagen-intermedia {
+                text-align: center;
+                margin: 30px auto;
+                max-width: 960px; /* opcional: para limitar ancho */
+            }
+            .imagen-intermedia img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;   /* opcional */
+                box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* opcional */
+            }
+        </style>
+    </head>
+    <body class="argentino">
+        <div class="tope2" id="tope2">
+            <div class="tope2_contenedor">
+                <div class="tope2_logo">
+                    <a href="/">
+                        <img srcset="../logo.svg.png" sizes="(max-width: 767.98px) 132px, (min-width: 768px) 160px, 132px" src="../logo.svg.png" alt="Logo Listado Argentino" width="132" height="33">
+                    </a>
+                </div>
+                <div id="tope3_buscar">
+                    <form id="form-buscar" class="formulario">
+                        <input name="b" id="buscar_tope" type="text"  maxlength="100" placeholder="¿qué buscas?">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    <br>
+    <br>
+
+    <script>
+        // --------------------------------------------------------------------------------
+        // 1. DEFINICIÓN DE CATEGORÍAS (LISTA DE SLUGS)
+        // --------------------------------------------------------------------------------
+        const paginas = [
+            "aberturas","abogados","accesorios+para+baño","aceites+vegetales","adiestramiento+de+perros",
+            "adopcion+de+mascotas","agencias+de+modelaje","agencias+de+publicidad","aislantes","albaniles",
+            "alfombras","alimentos+congelados","alimentos+dieteticos","alimentos+en+conserva",
+            "alimentos+para+mascotas","alimentos+veganos","ambulancias","andamios","anticuarios","arquitectos",
+            "artes+marciales","articulos+de+electricidad","articulos+de+limpieza","articulos+de+peluqueria",
+            "articulos+deportivos","atletismo","autos","autobuses","autoescuelas","autos+chocados","azucar",
+            "ballet","balonmano","banos+portatiles","banos+quimicos","barberias","basquet","bazares",
+            "bebidas+alcoholicas","bebidas+sin+alcohol","bibliotecas","bicicleterias","billares","bowling",
+            "calefaccion+y+ventilacion","camiones","camionetas","carnavales","carnes","carpinteros+de+obra",
+            "carros+de+golf","casas+rodantes","caza+y+pesca","centros+educativos","cereales","chocolate",
+            "ciclismo","cines","circos","clases+de+idiomas","clubes+deportivos","colchoneria","colegios",
+            "comics","concesionarios","conciertos","conejo+mascota","contadores","corseterias",
+            "cortinas+y+persianas","cristalerias","cursos","desfiles+de+modas","discotecas",
+            "disenadores+graficos","droguerias","educacion+artistica","educacion+especial",
+            "educacion+primaria","educacion+privada","educacion+religiosa","educacion+secundaria",
+            "electricistas","electrodomesticos","escribanos","escuelas","estetica+corporal","eventos",
+            "florerias","gatos+mascota","higiene+personal","iluminacion","imprentas",
+            "instrumentos+musicales","jardineria","joyerias","jugueterias","librerias","maquillajes",
+            "marroquinerias","muebles","pajarerias","paseadores+de+perros","peceras","peces","peluquerias",
+            "peluquerias+de+mascotas","piercings","tatuajes","unas","venta+de+inmuebles","veterinarias"
+        ];
+
+         const BASE_URL_CATEGORIAS = 'https://listadoargentino.com/mexico/';
+         const FALLBACK_URL = 'https://listadoargentino.com/';
+
+
+        document.getElementById('form-buscar').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let busqueda = document.getElementById('buscar_tope').value.trim();
+
+            if (busqueda) {
+                
+                // 1. Normalizar la búsqueda del usuario:
+                //   - Minúsculas.
+                //   - Reemplazar espacios por '+' para que coincida directamente con los slugs.
+                const busquedaNormalizada = busqueda.toLowerCase().replace(/\s+/g, '+');
+
+                // 2. Definir una longitud mínima para evitar búsquedas de 1 o 2 letras.
+                // Si la búsqueda es muy corta, la forzamos a ser exacta o buscamos prefijos largos.
+                const MIN_LENGTH = 3;
+                
+                let categoriaEncontrada = null;
+                
+                // Búsqueda Prioritaria (si el término es largo, buscamos coincidencia parcial)
+                if (busquedaNormalizada.length >= MIN_LENGTH) {
+                    // Buscamos la PRIMERA categoría que INCLUYE el término. 
+                    // Esto permite: "aceites vegetales" -> "aceites+vegetales"
+                    // Y también: "cir" -> "circos"
+                    categoriaEncontrada = paginas.find(slug => {
+                        return slug.includes(busquedaNormalizada);
+                    });
+                }
+
+                // Búsqueda Secundaria (si la búsqueda corta falló o era muy corta, buscamos coincidencia exacta)
+                // Si el usuario puso una palabra corta (e.g., "azucar") o si la búsqueda parcial falló, 
+                // comprobamos si coincide exactamente con algún slug.
+                if (!categoriaEncontrada && busquedaNormalizada.length > 0) {
+                    categoriaEncontrada = paginas.find(slug => {
+                        // Esta comprobación sirve para slugs cortos como "azucar" o "autos"
+                        return slug === busquedaNormalizada;
+                    });
+                }
+
+                // 3. Redirección
+                if (categoriaEncontrada) {
+                    const url = BASE_URL_CATEGORIAS + categoriaEncontrada;
+                    window.location.href = url;
+                } else {
+                    // Si no hay ninguna coincidencia, se redirige al inicio.
+                    window.location.href = FALLBACK_URL;
+                }
+            } else {
+                // Si la búsqueda está vacía, se redirige al fallback.
+                window.location.href = FALLBACK_URL;
+            }
+        });
+    </script>           
+        <script>
+            !function() {
+                function e() {
+                    l = o.scrollY || n.scrollTop,
+                    s < l ? t = 2 : l < s && (t = 1),
+                    t !== c && function(e, l) {
+                        if (e === 2 && l > 101) {
+                            i.classList.add("hide");
+                            c = e
+                        } else if (e === 1) {
+                            i.classList.remove("hide");
+                            c = e
+                        }
+                    }(t, l),
+                    s = l
+                }
+                var l, n = document.documentElement, o = window, s = o.scrollY || n.scrollTop, t = 0, c = 0, i = document.getElementById("tope2");
+                null != i && screen.width < 768 && window.addEventListener("scroll", e, {
+                    passive: !0
+                })
+            }();
+        </script>
+        <div id="contenido" style="margin-top: 0px;">
+            <div class="home_taxonomia">
+                <h1>Deportes</h1>
+              <ul>
+                <li class="foto">
+                    <a href="/argentino/mexico/artes+marciales" title="Artes marciales en Mexico">
+                    <img src="../imagenes/artes-marciales.jpg" width="100" height="75" alt="Artes marciales en Mexico" loading="lazy">
+                    </a>
+                    <a href="/argentino/mexico/artes+marciales" title="Artes marciales en Mexico">Artes marciales</a>
+                </li>
+                <li class="foto">
+                    <a href="/argentino/mexico/articulos+deportivos" title="Artículos deportivos en Mexico">
+                    <img src="../imagenes/articulos-deportivos.jpg" width="100" height="75" alt="Artículos deportivos en Mexico" loading="lazy">
+                    </a>
+                    <a href="/argentino/mexico/articulos+deportivos" title="Artículos deportivos en Mexico">Artículos deportivos</a>
+                </li>
+                <li class="foto">
+                    <a href="/argentino/mexico/atletismo" title="Atletismo en Mexico">
+                    <img src="../imagenes/ropas-deportivas.jpg" width="100" height="75" alt="Atletismo en Mexico" loading="lazy">
+                    </a>
+                    <a href="/argentino/mexico/atletismo" title="Atletismo en Mexico">Atletismo</a>
+                </li>
+                <li class="foto">
+                    <a href="/argentino/mexico/balonmano" title="Balonmano en Mexico">
+                    <img src="../imagenes/balonmano.jpg" width="100" height="75" alt="Balonmano en Mexico" loading="lazy">
+                    </a>
+                    <a href="/argentino/mexico/balonmano" title="Balonmano en Mexico">Balonmano</a>
+                </li>
+                <li class="foto">
+                    <a href="/argentino/mexico/basquet" title="Basquet en Mexico">
+                    <img src="../imagenes/basket.jpg" width="100" height="75" alt="Basquet en Mexico" loading="lazy">
+                    </a>
+                    <a href="/argentino/mexico/basquet" title="Basquet en Mexico">Basquet</a>
+                </li>
+                <li class="foto">
+                    <a href="/argentino/mexico/bicicleterias" title="Bicicleterías en Mexico">
+                    <img src="../imagenes/bicicletas.jpg" width="100" height="75" alt="Bicicleterías en Mexico" loading="lazy">
+                    </a>
+                    <a href="/argentino/mexico/bicicleterias" title="Bicicleterías en Mexico">Bicicleterías</a>
+                </li>
+                <li class="foto">
+                    <a href="/argentino/mexico/bowling" title="Bowling en Mexico">
+                    <img src="../imagenes/bowling.jpg" width="100" height="75" alt="Bowling en Mexico" loading="lazy">
+                    </a>
+                    <a href="/argentino/mexico/bowling" title="Bowling en Mexico">Bowling</a>
+                </li>
+                <li class="foto">
+                    <a href="/argentino/mexico/caza+y+pesca" title="Caza y pesca en Mexico">
+                    <img src="../imagenes/pesca.jpg" width="100" height="75" alt="Caza y pesca en Mexico" loading="lazy">
+                    </a>
+                    <a href="/argentino/mexico/caza+y+pesca" title="Caza y pesca en Mexico">Caza y pesca</a>
+                </li>
+                <li class="foto">
+                    <a href="/argentino/mexico/ciclismo" title="Ciclismo en Mexico">
+                    <img src="../imagenes/ciclismo.jpg" width="100" height="75" alt="Ciclismo en Mexico" loading="lazy">
+                    </a>
+                    <a href="/argentino/mexico/ciclismo" title="Ciclismo en Mexico">Ciclismo</a>
+                </li>
+                <li class="foto">
+                    <a href="/argentino/mexico/clubes+deportivos" title="Clubes deportivos en Mexico">
+                    <img src="../imagenes/clubes-deportivos.jpg" width="100" height="75" alt="Clubes deportivos en Mexico" loading="lazy">
+                    </a>
+                    <a href="/argentino/mexico/clubes+deportivos" title="Clubes deportivos en Mexico">Clubes deportivos</a>
+                </li>
+            </ul>
+            </div>
+            <div class="imagen-intermedia">
+                <img src="../imagenes/Deportes_foto_portada.png" alt="Banner de alimentación" loading="lazy">
+            </div>
+            <div class="iconos_frases_inicio">
+                <div class="item">
+                    <a href="/argentino/home/alimentacion.html" title="Alimentación en Mexico" style="background-color:#9BB9FF;">
+                       <span style="font-size: 32px; line-height: 52px;" aria-hidden="true" title="Alimentación">🍔</span> 
+                    </a>
+                    <a href="/argentino/home/alimentacion.html" title="Alimentación en Mexico">Alimentación</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino/home/belleza+y+estetica" title="Belleza y estética en Mexico" style="background-color:#23E5D8;">
+                        <span style="font-size: 32px; line-height: 52px;" aria-hidden="true" title="Belleza y estética">💅</span> 
+                    </a>
+                    <a href="/argentino/home/belleza+y+estetica" title="Belleza y estética en Mexico">Belleza y estética</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino/home/compras" title="Compras en Mexico" style="background-color:#D2B982;">
+                        <span style="font-size: 32px; line-height: 52px;" aria-hidden="true" title="Compras">🛒</span> 
+                    </a>
+                    <a href="/argentino/home/compras" title="Compras en Mexico">Compras</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino/home/construccion" title="Construcción en Mexico" style="background-color:#8DF1EE;">
+                        <span style="font-size: 32px; line-height: 52px;" aria-hidden="true" title="Construcción">🏗️</span> 
+                    </a>
+                    <a href="/argentino/home/construccion" title="Construcción en Mexico">Construcción</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino/home/deportes" title="Deportes en Mexico" style="background-color:#CDDCFF;">
+                        <span style="font-size: 32px; line-height: 52px;" aria-hidden="true" title="Deportes">⚽</span> 
+                    </a>
+                    <a href="/argentino/home/deportes" title="Deportes en Mexico">Deportes</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino/home/educacion" title="Educación en Mexico" style="background-color:#FF645C;">
+                        <span style="font-size: 32px; line-height: 52px;" aria-hidden="true" title="Educación">📚</span> 
+                    </a>
+                    <a href="/argentino/home/educacion" title="Educación en Mexico">Educación</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino/home/hogar+y+jardin" title="Hogar y jardín en Mexico" style="background-color:#9BB9FF;">
+                        <span style="font-size: 32px; line-height: 52px;" aria-hidden="true" title="Hogar y jardín">🏡</span> 
+                    </a>
+                    <a href="/argentino/home/hogar+y+jardin" title="Hogar y jardín en Mexico">Hogar y jardín</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino/home/mascotas" title="Mascotas en Mexico" style="background-color:#23E5D8;">
+                        <span style="font-size: 32px; line-height: 52px;" aria-hidden="true" title="Mascotas">🐾</span>
+                    </a>
+                    <a href="/argentino/home/mascotas" title="Mascotas en Mexico">Mascotas</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino/home/motor" title="Motor en Mexico" style="background-color:#D2B982;">
+                        <span style="font-size: 32px; line-height: 52px;" aria-hidden="true" title="Motor">🚗</span> 
+                    </a>
+                    <a href="/argentino/home/motor" title="Motor en Mexico">Motor</a>
+                </div>
+                <div class="item">
+                    <a href="/argentino/home/profesionales" title="Profesionales en Mexico" style="background-color:#8DF1EE;">
+                        <span style="font-size: 32px; line-height: 52px;" aria-hidden="true" title="Profesionales">🧑‍💼</span>
+                    </a>
+                    <a href="/argentino/home/profesionales" title="Profesionales en Mexico">Profesionales</a>
+                </div>
+            </div>
+        </div>
+        <div id="pie">
+            <p>
+                <a href="about-us" rel="nofollow">Acerca de</a>
+                - <a href="../faqs.html" rel="nofollow">Formulario</a>
+                
+            </p>
+        </div>
+        <div id="token" data-token="642B1647578255317465105F17054C7C57184C007E773C0682443B35304E1170771B1F3F1B48017614117" style="display:none;"></div>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-FL113DLLF8"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-FL113DLLF8");
+        </script>
+        <script src="../js/funciones.js" defer></script>
+    </body>
+</html>

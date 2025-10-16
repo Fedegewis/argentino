@@ -181,18 +181,22 @@
             }
 
             .tope2_logo img {
-            height: 55px; /* tamaño ideal para coincidir con el buscador */
-            width: auto;  /* mantiene proporción */
+            height: 80px !important; /* aumenta el tamaño visual */
+            width: auto !important;
             padding-left: 10px;
             vertical-align: middle;
+            display: block; /* evita compresión por inline */
             }
 
             @media (max-width: 767px) {
             .tope2_contenedor {
-                height: 55px;
-            }
+                height: 65px;
             }
 
+            .tope2_logo img {
+                height: 55px !important;
+            }
+            }
 
 
 

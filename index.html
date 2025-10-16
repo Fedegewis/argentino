@@ -166,12 +166,13 @@
                 border-bottom: 1px solid #d4d4d4
             }
 
+           
             .tope2_contenedor {
             display: flex;
             align-items: center;
             justify-content: space-between;
             max-width: 999px;
-            height: 65px; /* suficiente para contener el nuevo tamaño */
+            height: 80px; /* más alto para acompañar el logo */
             margin: 0 auto;
             gap: 15px;
             }
@@ -181,20 +182,19 @@
             }
 
             .tope2_logo img {
-            height: 80px !important; /* aumenta el tamaño visual */
-            width: auto !important;
+            height: 65px; /* tamaño visible y limpio */
+            width: auto;
             padding-left: 10px;
-            vertical-align: middle;
-            display: block; /* evita compresión por inline */
+            display: block; /* evita compresión */
             }
 
             @media (max-width: 767px) {
             .tope2_contenedor {
-                height: 65px;
+                height: 60px;
             }
 
             .tope2_logo img {
-                height: 55px !important;
+                height: 45px;
             }
             }
 
